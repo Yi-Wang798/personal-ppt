@@ -1,6 +1,6 @@
 # Personal PPT
 
-[简体中文](README.md) | English
+English | [简体中文](README.zh-CN.md)
 
 Personal PPT is a Codex plugin for research presentations. It creates visual design references, then rebuilds text, tables, data charts, and simple process diagrams as editable PowerPoint objects.
 
