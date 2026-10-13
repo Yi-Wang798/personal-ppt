@@ -1,0 +1,29 @@
+{
+  "name": "personal-ppt",
+  "version": "1.7.0",
+  "description": "先确认母版，再按母版逐页生图和叠图重建可编辑 PPT。",
+  "skills": "./skills/",
+  "keywords": [
+    "ppt",
+    "pptx",
+    "presentations",
+    "editable",
+    "imagegen"
+  ],
+  "interface": {
+    "displayName": "个人 PPT",
+    "shortDescription": "生图样张、可编辑 PPT 与逐页检查",
+    "longDescription": "作者先选择确认母版设计图；逐页生图引用母版和原数据/机理图。先建立原生 PPT 母版，复用占位符和固定文字样式，用原图底图测量重建，复杂元素独立生图插入，检查实际位置、字号、元素完整性和底图残留。新增同源设计稿与执行锁、统一母版下的多种内容布局、页面节奏、实际对象转换追踪和科研数据校验。冻结原设计图、独立分段与分层测量、素材完整性验收、复杂样页先验收、逐页真实对照和交付阻断。参考优先并允许按原图比例与可读性灵活优化，新增局部调整记录、对象与文字居中、整段加粗检查。生图前文案审核与备注分流、语义换行、组合与跨组件布局检查、区域颜色采样与三项独立验收。",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "根据这份材料制作有设计感的可编辑中文 PPT。",
+      "先给我看正文样张，选定后再制作全套。",
+      "每页先生图，再重建为可编辑 PPT。"
+    ],
+    "brandColor": "#2A9D8F"
+  }
+}
