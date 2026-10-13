@@ -1,4 +1,4 @@
 interface:
-  display_name: "个人可编辑 PPT"
+  display_name: "personal-ppt"
   short_description: "先确认母版，再按母版逐页生图，叠图测量重建可编辑 PPT，保留完整元素"
   default_prompt: "使用 $personal-ppt，先生成母版图让我选定，再逐页生图并按图制作可编辑 PPT。"
