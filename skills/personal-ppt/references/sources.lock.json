@@ -1,0 +1,169 @@
+{
+  "retrieved_on": "2026-10-10",
+  "sources": [
+    {
+      "repository": "zarazhangrui/frontend-slides",
+      "commit": "9906a34d640d2111f724544cbc50f7f130569ae1",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "832994fe1dfcce2aa7ceca9a1b7b708eca94becef242713999855f4e946cf4d5",
+          "url": "https://github.com/zarazhangrui/frontend-slides/blob/9906a34d640d2111f724544cbc50f7f130569ae1/SKILL.md"
+        },
+        {
+          "path": "STYLE_PRESETS.md",
+          "sha256": "b0093ae6f9c295e561c7d4a9ddf69d0edfd2810b1721ba1c2022a1ad9681c82c",
+          "url": "https://github.com/zarazhangrui/frontend-slides/blob/9906a34d640d2111f724544cbc50f7f130569ae1/STYLE_PRESETS.md"
+        }
+      ]
+    },
+    {
+      "repository": "MiniMax-AI/skills",
+      "commit": "60aaae52bb2af8162732751a4332f62a5fef518b",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "skills/pptx-generator/references/design-system.md",
+          "sha256": "8a225af2ebd3bfa979616da74b7ec34395712fe1a8195e5613214aa291211996",
+          "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/pptx-generator/references/design-system.md"
+        },
+        {
+          "path": "skills/pptx-generator/references/pitfalls.md",
+          "sha256": "247a8eb1860524fdd0d8a3365a791490c162d4a58677eb3f329d4dd682ce0257",
+          "url": "https://github.com/MiniMax-AI/skills/blob/60aaae52bb2af8162732751a4332f62a5fef518b/skills/pptx-generator/references/pitfalls.md"
+        }
+      ]
+    },
+    {
+      "repository": "siril9/presentation-skill",
+      "commit": "efd899c5ddf866af2ce0001c4c9340af775d4d55",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "DESIGN.md",
+          "sha256": "f68e742822a7403cbae2f8f71efa73fc6a7cbf7baf5ddea25f146fd1f15700bf",
+          "url": "https://github.com/siril9/presentation-skill/blob/efd899c5ddf866af2ce0001c4c9340af775d4d55/DESIGN.md"
+        },
+        {
+          "path": "references/reproducible_workflow.md",
+          "sha256": "6aabad8731b5810a414767b1885e15e81c67051efea6b00add150cab4f609248",
+          "url": "https://github.com/siril9/presentation-skill/blob/efd899c5ddf866af2ce0001c4c9340af775d4d55/references/reproducible_workflow.md"
+        }
+      ]
+    },
+    {
+      "repository": "ningzimu/codex-ppt-skill",
+      "commit": "85d4e629275e6c5793a33801d29b364383ea4c1e",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "skills/codex-ppt/SKILL.md",
+          "sha256": "dce8b7ef2c3610fba7bf74115904f460ae1f64b54b50c0f4504f66fd65e5d2bb",
+          "url": "https://github.com/ningzimu/codex-ppt-skill/blob/85d4e629275e6c5793a33801d29b364383ea4c1e/skills/codex-ppt/SKILL.md"
+        },
+        {
+          "path": "skills/codex-ppt/docs/outline-style-and-sample.md",
+          "sha256": "d6f0a477f1027d0c075abcdd5a1df781a499a1d59d9be6d63ddcfc21ad26596c",
+          "url": "https://github.com/ningzimu/codex-ppt-skill/blob/85d4e629275e6c5793a33801d29b364383ea4c1e/skills/codex-ppt/docs/outline-style-and-sample.md"
+        },
+        {
+          "path": "skills/codex-ppt/docs/user-supplied-assets.md",
+          "sha256": "e60ffab53f5c52035a42040f8dda6a002bdd9d49ce5098c4c5835e08231c4069",
+          "url": "https://github.com/ningzimu/codex-ppt-skill/blob/85d4e629275e6c5793a33801d29b364383ea4c1e/skills/codex-ppt/docs/user-supplied-assets.md"
+        }
+      ]
+    },
+    {
+      "repository": "nanxstats/ggsci",
+      "commit": "37b74f85e62680b9d4523b0b4c0d9bfa0403d299",
+      "license": "GPL-3.0-or-later",
+      "retrieved_on": "2026-10-12",
+      "usage": "NPG/AAAS/NEJM color value subsets only; no R implementation bundled",
+      "files": [
+        {
+          "path": "R/palettes.R",
+          "sha256": "4b2dccea74db9df26a08e9184a05e64390bcca8b986120efd579f64eccc5fcab",
+          "url": "https://github.com/nanxstats/ggsci/blob/37b74f85e62680b9d4523b0b4c0d9bfa0403d299/R/palettes.R"
+        }
+      ]
+    },
+    {
+      "repository": "M1n-n9/academic-ppt-master",
+      "commit": "6825d33f2931b8894435b9bd25c08cfce3476ff0",
+      "retrieved_on": "2026-10-12",
+      "license": "MIT; engine attributed to hugohe3/ppt-master",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "55d61a6a3dc6fae779646f16d5ceb5099c6f10c0261aa5e82989d1afc3d09e96",
+          "url": "https://github.com/M1n-n9/academic-ppt-master/blob/6825d33f2931b8894435b9bd25c08cfce3476ff0/SKILL.md"
+        },
+        {
+          "path": "ATTRIBUTION.md",
+          "sha256": "3467883e31865681e524a02f76aaa45803140540e4a8355d030875a76b231284",
+          "url": "https://github.com/M1n-n9/academic-ppt-master/blob/6825d33f2931b8894435b9bd25c08cfce3476ff0/ATTRIBUTION.md"
+        },
+        {
+          "path": "references/executor-base.md",
+          "sha256": "0cf6c622c2eede92ba8fbe5e5d1f245816686b7aec580b0385f708ae6c945197",
+          "url": "https://github.com/M1n-n9/academic-ppt-master/blob/6825d33f2931b8894435b9bd25c08cfce3476ff0/references/executor-base.md"
+        },
+        {
+          "path": "references/modes/academic.md",
+          "sha256": "1ccfafc2fc8f2a725df4902c9537ea8552d8b36d1569f1cda98c38f81a4bd259",
+          "url": "https://github.com/M1n-n9/academic-ppt-master/blob/6825d33f2931b8894435b9bd25c08cfce3476ff0/references/modes/academic.md"
+        },
+        {
+          "path": "references/image-generator.md",
+          "sha256": "1337cec950100946fa98d4caf98f696726f42ee843a648c47f01626626471cd8",
+          "url": "https://github.com/M1n-n9/academic-ppt-master/blob/6825d33f2931b8894435b9bd25c08cfce3476ff0/references/image-generator.md"
+        },
+        {
+          "path": "workflows/verify-charts.md",
+          "sha256": "43d7a8dafc2d2572a69b700ff78524ccddfae14405008d39f24669c259a8992a",
+          "url": "https://github.com/M1n-n9/academic-ppt-master/blob/6825d33f2931b8894435b9bd25c08cfce3476ff0/workflows/verify-charts.md"
+        },
+        {
+          "path": "scripts/svg_to_pptx/drawingml_converter.py",
+          "sha256": "2cbec28a1ef0be9cc2b691b7f300d9e70c625e0d8a261eeabf81c2189943838d",
+          "url": "https://github.com/M1n-n9/academic-ppt-master/blob/6825d33f2931b8894435b9bd25c08cfce3476ff0/scripts/svg_to_pptx/drawingml_converter.py"
+        }
+      ]
+    }
+  ],
+  "design_guidance": [
+    {
+      "url": "https://www.nature.com/documents/natrev-artworkguide.pdf",
+      "retrieved_on": "2026-10-12",
+      "usage": "hierarchy, clear labeling, focus/context, accessibility; no brand palette copied"
+    }
+  ],
+  "local_method_references": [
+    {
+      "plugin": "ai-illustrator-workflow",
+      "version": "0.1.0+codex.20260921025241",
+      "read_on": "2026-10-12",
+      "reuse": "methods only, original PPT implementation",
+      "files": [
+        {
+          "path": "scientific-ai-illustrator/SKILL.md",
+          "sha256": "5268332bb81425d1a1d4fa27c75f690b309aa64eec0b14e476b8111d7285498f"
+        },
+        {
+          "path": "scientific-ai-illustrator/references/underlay-reconstruction.md",
+          "sha256": "e444f683d0fedcc5986adcef8452511f42ebcfa20c0d4d6e63be8b2eaaa5562c"
+        }
+      ]
+    }
+  ],
+  "local_references": [
+    {
+      "name": "humanizer-zh",
+      "retrieved_on": "2026-10-12",
+      "path": "humanizer-zh/SKILL.md",
+      "sha256": "35eca1b1a5d313b7ebcd2236670831c2e5f13920b8259208eeb3cfad94685fa0",
+      "reuse": "Selective methods only; no copied implementation or full text"
+    }
+  ]
+}
