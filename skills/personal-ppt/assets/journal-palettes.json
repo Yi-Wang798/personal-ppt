@@ -1,0 +1,130 @@
+{
+  "palette_version": 1,
+  "palettes": [
+    {
+      "id": "npg",
+      "variant": "nrc",
+      "display_name": "NPG / Nature 风格参考",
+      "classification": "journal-inspired categorical palette; not an official PPT standard",
+      "colors": [
+        "#E64B35",
+        "#4DBBD5",
+        "#00A087",
+        "#3C5488",
+        "#F39B7F",
+        "#8491B4",
+        "#91D1C2",
+        "#DC0000",
+        "#7E6148",
+        "#B09C85"
+      ],
+      "suggested_roles": {
+        "background": "#FFFFFF",
+        "text": "#20242A",
+        "primary": "#3C5488",
+        "accent": "#E64B35",
+        "muted": "#64707D",
+        "categorical": [
+          "#E64B35",
+          "#4DBBD5",
+          "#00A087",
+          "#3C5488",
+          "#F39B7F",
+          "#8491B4",
+          "#91D1C2",
+          "#DC0000",
+          "#7E6148",
+          "#B09C85"
+        ]
+      },
+      "origin": {
+        "repository": "nanxstats/ggsci",
+        "commit": "37b74f85e62680b9d4523b0b4c0d9bfa0403d299",
+        "file": "R/palettes.R",
+        "license": "GPL-3.0-or-later"
+      }
+    },
+    {
+      "id": "aaas",
+      "variant": "default",
+      "display_name": "AAAS / Science 风格参考",
+      "classification": "journal-inspired categorical palette; not an official PPT standard",
+      "colors": [
+        "#3B4992",
+        "#EE0000",
+        "#008B45",
+        "#631879",
+        "#008280",
+        "#BB0021",
+        "#5F559B",
+        "#A20056",
+        "#808180",
+        "#1B1919"
+      ],
+      "suggested_roles": {
+        "background": "#FFFFFF",
+        "text": "#20242A",
+        "primary": "#3B4992",
+        "accent": "#631879",
+        "muted": "#64707D",
+        "categorical": [
+          "#3B4992",
+          "#EE0000",
+          "#008B45",
+          "#631879",
+          "#008280",
+          "#BB0021",
+          "#5F559B",
+          "#A20056",
+          "#808180",
+          "#1B1919"
+        ]
+      },
+      "origin": {
+        "repository": "nanxstats/ggsci",
+        "commit": "37b74f85e62680b9d4523b0b4c0d9bfa0403d299",
+        "file": "R/palettes.R",
+        "license": "GPL-3.0-or-later"
+      }
+    },
+    {
+      "id": "nejm",
+      "variant": "default",
+      "display_name": "NEJM 风格参考",
+      "classification": "journal-inspired categorical palette; not an official PPT standard",
+      "colors": [
+        "#BC3C29",
+        "#0072B5",
+        "#E18727",
+        "#20854E",
+        "#7876B1",
+        "#6F99AD",
+        "#FFDC91",
+        "#EE4C97"
+      ],
+      "suggested_roles": {
+        "background": "#FFFFFF",
+        "text": "#20242A",
+        "primary": "#0072B5",
+        "accent": "#E18727",
+        "muted": "#64707D",
+        "categorical": [
+          "#BC3C29",
+          "#0072B5",
+          "#E18727",
+          "#20854E",
+          "#7876B1",
+          "#6F99AD",
+          "#FFDC91",
+          "#EE4C97"
+        ]
+      },
+      "origin": {
+        "repository": "nanxstats/ggsci",
+        "commit": "37b74f85e62680b9d4523b0b4c0d9bfa0403d299",
+        "file": "R/palettes.R",
+        "license": "GPL-3.0-or-later"
+      }
+    }
+  ]
+}

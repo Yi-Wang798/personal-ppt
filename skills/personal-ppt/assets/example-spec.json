@@ -1,0 +1,344 @@
+{
+  "schema_version": 1,
+  "title": "个人 PPT 工作流示例",
+  "audience": "使用本技能的演示制作人员",
+  "purpose": "验证原生对象，不作为真实业务材料",
+  "language": "zh-CN",
+  "mode": "representative",
+  "interaction": "autonomous",
+  "density": "speaking",
+  "slide_count": 5,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "style": {
+    "name": "科研清晰",
+    "palette": [
+      "#E64B35",
+      "#4DBBD5",
+      "#00A087",
+      "#3C5488",
+      "#F39B7F",
+      "#8491B4",
+      "#91D1C2",
+      "#DC0000",
+      "#7E6148",
+      "#B09C85"
+    ],
+    "fonts": [
+      "Microsoft YaHei",
+      "Times New Roman"
+    ],
+    "visual_direction": "白底、深墨色文字、蓝绿强调；证据为主，开放留白",
+    "roles": {
+      "background": "#FFFFFF",
+      "text": "#20242A",
+      "primary": "#3C5488",
+      "accent": "#E64B35",
+      "muted": "#64707D",
+      "categorical": [
+        "#E64B35",
+        "#4DBBD5",
+        "#00A087",
+        "#3C5488",
+        "#F39B7F",
+        "#8491B4",
+        "#91D1C2",
+        "#DC0000",
+        "#7E6148",
+        "#B09C85"
+      ]
+    }
+  },
+  "sources": [],
+  "slides": [
+    {
+      "id": "cover",
+      "title": "个人 PPT 工作流",
+      "purpose": "说明原生编辑流程",
+      "layout": "大标题和简短说明",
+      "notes": "技术演示；未包含生图样张。",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "editable": true,
+          "box": {
+            "left": 72,
+            "top": 68,
+            "width": 1136,
+            "height": 88
+          },
+          "text": "个人 PPT 工作流",
+          "font_size_pt": 34
+        },
+        {
+          "id": "body",
+          "kind": "text",
+          "editable": true,
+          "box": {
+            "left": 72,
+            "top": 230,
+            "width": 1050,
+            "height": 130
+          },
+          "text": "样张确定视觉方向，原生对象保留编辑能力",
+          "font_size_pt": 24
+        }
+      ],
+      "layout_family": "typographic",
+      "treatment": "accent-cover"
+    },
+    {
+      "id": "content",
+      "title": "内容与设计共用一份说明",
+      "purpose": "说明内容源的职责",
+      "layout": "上标题，下方开放正文",
+      "notes": "技术演示；未包含生图样张。",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "editable": true,
+          "box": {
+            "left": 72,
+            "top": 68,
+            "width": 1136,
+            "height": 88
+          },
+          "text": "内容与设计共用一份说明",
+          "font_size_pt": 34
+        },
+        {
+          "id": "body",
+          "kind": "text",
+          "editable": true,
+          "box": {
+            "left": 72,
+            "top": 220,
+            "width": 1080,
+            "height": 210
+          },
+          "text": "准确文字、数据与原图先保存。生图提供构图参考，PPT 使用原始内容重建。",
+          "font_size_pt": 24
+        }
+      ],
+      "layout_family": "split",
+      "treatment": "neutral-light"
+    },
+    {
+      "id": "chart",
+      "title": "原生图表示例",
+      "purpose": "验证原生图表",
+      "layout": "标题上方，图表位于正文区域",
+      "notes": "技术演示；未包含生图样张。",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "editable": true,
+          "box": {
+            "left": 72,
+            "top": 68,
+            "width": 1136,
+            "height": 88
+          },
+          "text": "原生图表示例",
+          "font_size_pt": 34
+        },
+        {
+          "id": "data",
+          "kind": "chart",
+          "editable": true,
+          "box": {
+            "left": 90,
+            "top": 205,
+            "width": 1080,
+            "height": 350
+          },
+          "chart_type": "bar",
+          "categories": [
+            "示例甲",
+            "示例乙",
+            "示例丙"
+          ],
+          "series": [
+            {
+              "name": "合成示例",
+              "values": [
+                3,
+                5,
+                4
+              ]
+            }
+          ],
+          "unit": "演示单位"
+        },
+        {
+          "id": "caption",
+          "kind": "text",
+          "editable": true,
+          "box": {
+            "left": 90,
+            "top": 590,
+            "width": 1000,
+            "height": 40
+          },
+          "text": "数据为合成演示，仅用于技术验证",
+          "font_size_pt": 12
+        }
+      ],
+      "layout_family": "chart",
+      "treatment": "neutral-light"
+    },
+    {
+      "id": "table",
+      "title": "编辑性分工",
+      "purpose": "验证原生表格",
+      "layout": "上标题，下方宽表格",
+      "notes": "技术演示；未包含生图样张。",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "editable": true,
+          "box": {
+            "left": 72,
+            "top": 68,
+            "width": 1136,
+            "height": 88
+          },
+          "text": "编辑性分工",
+          "font_size_pt": 34
+        },
+        {
+          "id": "data",
+          "kind": "table",
+          "editable": true,
+          "box": {
+            "left": 90,
+            "top": 210,
+            "width": 1080,
+            "height": 330
+          },
+          "rows": [
+            [
+              "元素",
+              "交付形式"
+            ],
+            [
+              "正文",
+              "原生文本"
+            ],
+            [
+              "数据",
+              "原生图表/表格"
+            ],
+            [
+              "插画",
+              "独立可替换图片"
+            ]
+          ]
+        }
+      ],
+      "layout_family": "table",
+      "treatment": "neutral-light"
+    },
+    {
+      "id": "flow",
+      "title": "制作流程",
+      "purpose": "验证原生节点和连接线",
+      "layout": "三个水平节点和连接线",
+      "notes": "技术演示；未包含生图样张。",
+      "elements": [
+        {
+          "id": "title",
+          "kind": "text",
+          "editable": true,
+          "box": {
+            "left": 72,
+            "top": 68,
+            "width": 1136,
+            "height": 88
+          },
+          "text": "制作流程",
+          "font_size_pt": 34
+        },
+        {
+          "id": "plan",
+          "kind": "shape",
+          "editable": true,
+          "box": {
+            "left": 90,
+            "top": 280,
+            "width": 280,
+            "height": 110
+          },
+          "geometry": "rect",
+          "label": "准确内容"
+        },
+        {
+          "id": "build",
+          "kind": "shape",
+          "editable": true,
+          "box": {
+            "left": 500,
+            "top": 280,
+            "width": 280,
+            "height": 110
+          },
+          "geometry": "rect",
+          "label": "原生制作"
+        },
+        {
+          "id": "review",
+          "kind": "shape",
+          "editable": true,
+          "box": {
+            "left": 910,
+            "top": 280,
+            "width": 280,
+            "height": 110
+          },
+          "geometry": "rect",
+          "label": "逐页检查"
+        },
+        {
+          "id": "line-one",
+          "kind": "connector",
+          "editable": true,
+          "box": {
+            "left": 370,
+            "top": 335,
+            "width": 130,
+            "height": 0
+          },
+          "from": "plan",
+          "to": "build"
+        },
+        {
+          "id": "line-two",
+          "kind": "connector",
+          "editable": true,
+          "box": {
+            "left": 780,
+            "top": 335,
+            "width": 130,
+            "height": 0
+          },
+          "from": "build",
+          "to": "review"
+        }
+      ],
+      "layout_family": "process",
+      "treatment": "soft-context"
+    }
+  ],
+  "design_decision": {
+    "source_policy": "content-only-unless-explicit-style-request",
+    "palette_id": "npg",
+    "selection_reason": "Technical source example illustrating journal-inspired semantic colors and multiple layout roles; not a finished visual design.",
+    "chosen_direction": "evidence-editorial"
+  }
+}
