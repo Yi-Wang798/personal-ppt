@@ -19,10 +19,24 @@ v1.1 于 2026-10-12 新增 [ggsci](https://github.com/nanxstats/ggsci) 的 NPG/n
 
 当前通过 personal-ppt@personal 插件加载 skill，并提供相同内容的插件分发包。它不包含 Gamma/Canva 服务，也不声称已经连接这些账户。
 
-v1.3 按用户明确要求参考 `AI Illustrator Workflow` 及其 underlay-reconstruction.md，只借鉴作者选择、底图等比像素映射、组件清单、母对象复用、分区域校准和清洁导出方法。未复制 Illustrator JSX 或几何构造代码；没有引入 Illustrator 运行依赖，PPT 原生 master/layout/placeholder 来自当前 Presentations 的 API。
+v1.3 按用户明确要求参考 [AI Illustrator Workflow](https://github.com/Yi-Wang798/ai-illustrator-workflow) 及其 underlay-reconstruction.md，只借鉴作者选择、底图等比像素映射、组件清单、母对象复用、分区域校准和清洁导出方法。未复制 Illustrator JSX 或几何构造代码；没有引入 Illustrator 运行依赖，PPT 原生 master/layout/placeholder 来自当前 Presentations 的 API。
 
 
 v1.4 于 2026-10-12 借鉴 [academic-ppt-master](https://github.com/M1n-n9/academic-ppt-master)，固定提交 6825d33f2931b8894435b9bd25c08cfce3476ff0：规范锁、brand/layout 分层、页面节奏、转换 trace、科研叙事及数据坐标校验方法。该项目注明引擎来自 [hugohe3/ppt-master](https://github.com/hugohe3/ppt-master)。仅改写工作流方法，design_contract.py 和新增 OOXML trace 为本地新写；没有复制 SVG 转換器、模板库、生图 API 或其全部执行禁令。保留本地原生图表表格、默认视觉检查、原资料不移动和内置生图。MIT 及来源声明存于 licenses/。
 
 
 v1.7 依据用户截图反馈，参考本机已安装 humanizer-zh 的保留含义、删除填充语、重复概括和协作口吻方法；未复制其全文或引入幽默/个性表演。editorial_tools.py、color_sampler.py 与组合检查为本地新写。颜色采样只读图片，使用当前工作区 bundled Pillow，不增加外部服务或付费 API。
+
+
+## 2.0 通用化与文案设计参考
+
+2026-10-19：按任务分流、逐页生图输入分离、内部样页检查和兼容代码为本项目新增实现。以下仅选择性参考方法，没有复制这些项目的脚本或完整 skill，也未引入去检测或删除来源标记的功能。
+
+- [larashero3-dotcom/lieflat-less-ai-tone](https://github.com/larashero3-dotcom/lieflat-less-ai-tone)：体裁优先、最小改写、保留事实与判断强度。转换为生图前的中文轻量编辑，不照搬其冻结文章结构规则。
+- [blader/humanizer](https://github.com/blader/humanizer)：重复结构、空泛拔高和聊天残留的识别；本次 README 实际使用本地 Humanizer 2.8.2 与 Humanizer ZH 0.1.0 润色。
+- [daniel-bogale/anti-ai-writing-humanizer](https://github.com/daniel-bogale/anti-ai-writing-humanizer)：起草时保持自然、轻量编辑。未引入多轮检测引擎。
+- [keez97/humanizer](https://github.com/keez97/humanizer)：保留必要限定的轻量模式；未采用评分门槛或模型检测器。
+- [pbakaus/impeccable](https://github.com/pbakaus/impeccable)：按任务建立视觉层级，避免无目的套用界面卡片与装饰；只转化为幻灯片设计建议，未使用网页检测代码。
+- [opitaru-sys/deck-dna](https://github.com/opitaru-sys/deck-dna)：参考设计特征与文字容量的观察方法；未复制其脚本或模板。
+
+本次实现没有复制 Anthropic PPTX skill 的代码或专有许可文本；既有引擎与 upstream 许可保持原样。引用网页的项目自述不等于本插件经过成品质量验证。

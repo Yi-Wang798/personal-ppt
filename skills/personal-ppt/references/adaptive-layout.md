@@ -1,6 +1,6 @@
-# 参考优先，合理调整 v1.6
+# 参考优先，合理调整
 
-生成图片是设计提案，不是最终答案。优先级为：真实科研内容与证据完整性 → 可读性及无溢出 → 对齐、匀称与全套风格 → 尽量还原参考图。参考图若出现歪斜、错误居中、文字不足以容纳、图像比例失真或错误字重，应纠正，不为了贴图复刻缺陷。冻结图保留用于追溯，不要求每次局部调整都重新生整页或请用户确认；全局主题、科学表达或大量重排仍展示影响再确认。
+生成图片是设计提案，不是最终答案。优先级为：真实内容与素材完整性 → 可读性及无溢出 → 对齐、匀称与全套风格 → 尽量还原参考图。参考图若出现歪斜、错误居中、文字不足以容纳、图像比例失真或错误字重，应纠正，不为了贴图复刻缺陷。冻结图保留用于追溯，不要求每次局部调整都重新生整页或请用户确认；超出用户要求的全局主题、内容含义或页数变化先说明影响；review 模式涉及已确认方向的变化再请用户确认。
 
 ## 居中和加粗
 
@@ -16,7 +16,7 @@
 
 ## 可追溯的局部修正
 
-新项目 workflow_version=1.6。原 reference-measurements.json 与冻结图不变；每页 adaptations 保存各项调整。category 为 source-fit/text-readability/alignment/balance/reference-error；每项 id、element_id、reference_sha256、reason、observations、changes。changes 仅允许 box、paragraph、runs、line_breaks，每项含 before（原始独立测量或等比映射的 box）与 after（新的目标）。不能修改 text/kind/source_ids/数据/机制连接/实验组颜色或替换证据图片；如确需科学修改，走明确的内容修订流程。runs 局部排版调整保留原分段文字、字体、颜色，只调整字号、粗斜体；整段加粗逐个 run 设置。
+新项目 workflow_version="2.0"；旧 1.6/1.7 项目继续采用原版本。原 reference-measurements.json 与冻结图不变；每页 adaptations 保存各项调整。category 为 source-fit/text-readability/alignment/balance/reference-error；每项 id、element_id、reference_sha256、reason、observations、changes。changes 仅允许 box、paragraph、runs、line_breaks，每项含 before（原始独立测量或等比映射的 box）与 after（新的目标）。不能修改 text/kind/source_ids/数据/机制连接/实验组颜色或替换证据图片；如确需科学修改，走明确的内容修订流程。runs 局部排版调整保留原分段文字、字体、颜色，只调整字号、粗斜体；整段加粗逐个 run 设置。
 
 每个字段只记一次完整 before→after，不用一串互相覆盖的补丁。调整后 spec 保存 after，构建源读取 spec；更新设计锁、重新渲染成品。同一页多个相关对象分别记录；不得只移动图片却让图注或箭头悬空。全套标题等角色需要改变时统一更新母版，避免局部调整制造全套漂移。
 
@@ -41,11 +41,8 @@ alignment_constraints 示例：[{"axis":"horizontal","element_ids":["caption"],"
 
 ## 验收看最终效果
 
-未解决差异仍阻断；合理调整记录为 differences:[{status:"resolved-design-adjustment",adaptation_id:"对应调整 id",description:"实际变更"}]。visual-review 对每页含 adaptation_ids 和 adaptations_sha256（用 adaptive_layout.digest(page.adaptations)）；哈希绑定当前调整。这样差异无需假装为零，且未知偏移不能借“灵活调整”逃过检查。changed_layout 阻断项在 1.6 表示未经解释或破坏内容关系的改版，有有效记录且实际视觉改善的局部优化可为 false。
+未解决差异仍阻断；合理调整记录为 differences:[{status:"resolved-design-adjustment",adaptation_id:"对应调整 id",description:"实际变更"}]。visual-review 对每页含 adaptation_ids 和 adaptations_sha256（用 adaptive_layout.digest(page.adaptations)）；哈希绑定当前调整。这样差异无需假装为零，且未知偏移不能借“灵活调整”逃过检查。changed_layout 表示未经解释或破坏内容关系的改版，有有效记录且实际视觉改善的局部优化可为 false。
 
 看并排/叠图找遗漏，也看不带参考底图的最终清洁渲染评估阅读效果、均衡、对齐和图文比例。视感优先于机械像素相似。独立测量保留原样；检查按有效调整后的目标核对实际 PPT，不改原测量来消除错误。复杂样页的已确认版若被修改需重渲染对照；其余页的授权局部优化不逐页请求确认。
 
 数值检查不能自动判断美观或光学中心，也不能验证作者观察是否真实；最终仍需实际看图。旧 1.5 项目需升级 workflow_version 才采用此弹性机制，旧严格模式保持兼容。
-
-
-v1.7：生图前完成正文/演讲备注/制作记录分流、Humanizer 有限精简与独立文案审核；新增 semantic_lines、component_groups、component_constraints、editorial_groups、continuation_indent_px；颜色逐角色区域取样并链接母版；最终独立 content/layout/color 三项验收。新项目 workflow_version="1.7"，规则与命令见 [文案、组合布局和取色](editorial-layout-color.md)。保持 1.6 的可追溯灵活调整，不能用新规则强制机械复刻。

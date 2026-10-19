@@ -151,8 +151,12 @@ def check_sample(spec, base):
     path = base / filename
     if not path.is_file(): return ["复杂样页未验收；禁止批量重建"]
     receipt = read(path)
-    if receipt.get("approved") is not True or not receipt.get("user_reply"):
-        errors.append("复杂样页未获用户明确验收")
+    import workflow_policy
+    if workflow_policy.needs_user_review(spec):
+        if receipt.get("approved") is not True or not receipt.get("user_reply"):
+            errors.append("当前模式需要样页的真实用户验收")
+    elif receipt.get("reviewed") is not True or receipt.get("reviewer") != "agent" or receipt.get("user_reply") or receipt.get("approved") is True:
+        errors.append("自动模式需真实内部样页检查，不能伪造用户验收")
     sample_pptx = load_file(base, receipt.get("pptx"), errors, "样页 PPT")
     pages = {p["id"]: p for p in spec.get("slides", [])}
     sid = receipt.get("slide_id")
@@ -162,13 +166,19 @@ def check_sample(spec, base):
         if not reference.is_file() or receipt.get("reference", {}).get("sha256") != sha(reference):
             errors.append("样页验收引用了另一设计图")
         complexity = receipt.get("complexity", [])
-        if not isinstance(complexity, list) or len(set(complexity)) < 3 or not set(complexity) <= {"mixed-text", "layered-panel", "source-image", "connectors", "chart", "mechanism"}:
-            errors.append("样页须覆盖至少三种实际复杂特征")
+        minimum = 1 if workflow_policy.is_v2(spec) else 3
+        allowed = {"mixed-text", "layered-panel", "source-image", "connectors", "chart", "mechanism"}
+        if workflow_policy.is_v2(spec):
+            allowed |= {"text-layout", "table"}
+        if not isinstance(complexity, list) or len(set(complexity)) < minimum or not set(complexity) <= allowed:
+            errors.append("样页特征应对应本项目实际内容；旧项目仍要求至少三项")
         if 'mixed-text' in complexity and not any(len(e.get('runs', [])) > 1 for e in pages[sid].get('elements', [])):
             errors.append("样页声称混合文字但没有分段")
         elements = pages[sid].get('elements', [])
         kinds = [e.get('kind') for e in elements]
         for feature, valid in {
+            'text-layout': 'text' in kinds,
+            'table': 'table' in kinds,
             'layered-panel': kinds.count('shape') >= 2,
             'source-image': any(e.get('kind') == 'image' and e.get('role') == 'evidence' for e in elements),
             'connectors': 'connector' in kinds,
@@ -309,7 +319,7 @@ def check_actual_runs(spec, pptx):
 def delivery(spec, base, pptx, review_path):
     import ppt_tools as ppt
     errors = check_measurements(spec, base) + check_sample(spec, base)
-    if spec.get('workflow_version')=='1.7':
+    if spec.get('workflow_version') in {'1.7','2.0'}:
         import editorial_tools,color_sampler
         errors.extend(editorial_tools.check(spec,base));errors.extend(color_sampler.verify(spec,base))
         errors.extend(editorial_tools.check_visible_copy(spec,pptx))
@@ -326,7 +336,7 @@ def delivery(spec, base, pptx, review_path):
         if item.get('reference', {}).get('sha256') != sha(base/page['design_reference']):
             errors.append(sid + ': 对照参考已换稿')
         check_review(base, item, errors, sid, page)
-        if spec.get('workflow_version')=='1.7':
+        if spec.get('workflow_version') in {'1.7','2.0'}:
             for gate in ('content','layout','color'):
                 record=item.get('review_sections',{}).get(gate,{})
                 if record.get('passed') is not True or not record.get('observations'):

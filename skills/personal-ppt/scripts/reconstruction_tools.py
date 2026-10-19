@@ -58,10 +58,8 @@ def check_contract(spec,base,stage="production"):
                 errors.append("母版 reference_size 与实际 PNG 尺寸不一致")
     approval=master.get("approval",{})
     if not isinstance(approval,dict):approval={}
-    if approval.get("confirmed") is not True or not isinstance(approval.get("user_selection"),str) or not approval["user_selection"].strip():
-        errors.append("母版未收到作者明确选择确认，不能制作分页")
-    if digest and approval.get("reference_sha256")!=digest:
-        errors.append("作者确认记录与当前母版图不一致，需重新确认")
+    import workflow_policy
+    errors.extend(workflow_policy.check_master_selection(spec, digest))
     tokens=master.get("tokens",{})
     if not isinstance(tokens,dict):tokens={}
     fonts=tokens.get("fonts",{})
@@ -100,7 +98,7 @@ def check_contract(spec,base,stage="production"):
             errors.append(f"{sid} 生图未记录所选母版引用")
         elements={e.get("id"):e for e in page.get("elements",[]) if isinstance(e,dict)}
         adjusted_elements={}
-        if spec.get('workflow_version') in {'1.6','1.7'} and page.get('adaptations'):
+        if spec.get('workflow_version') in {'1.6','1.7','2.0'} and page.get('adaptations'):
             import adaptive_layout
             measurement_path=base/'design/reference-measurements.json'
             if measurement_path.is_file():
@@ -170,7 +168,7 @@ def main():
         if args.command=="check":
             file=Path(args.spec).resolve();spec=json.loads(file.read_text(encoding="utf-8-sig"))
             errors=check_contract(spec,file.parent,args.stage)
-            if spec.get("workflow_version") in {"1.5","1.6","1.7"} and args.stage!="pagination" and spec.get("reconstruction_policy")!="skip-explicit":
+            if spec.get("workflow_version") in {"1.5","1.6","1.7","2.0"} and args.stage!="pagination" and spec.get("reconstruction_policy")!="skip-explicit":
                 import fidelity_tools
                 errors.extend(fidelity_tools.check_measurements(spec,file.parent))
                 if args.stage=="production":errors.extend(fidelity_tools.check_sample(spec,file.parent))

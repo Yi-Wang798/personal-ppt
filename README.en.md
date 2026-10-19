@@ -1,88 +1,93 @@
-# Personal PPT
+# personal-ppt
 
 English | [简体中文](README.zh-CN.md)
 
-Personal PPT is a Codex plugin for research presentations. It creates visual design references, then rebuilds text, tables, data charts, and simple process diagrams as editable PowerPoint objects.
+A Codex plugin for editable presentations: work reports, business proposals, lessons, product introductions, research talks, and personal portfolios. It generates and shows a design image for each slide, then rebuilds the slide in PowerPoint.
 
-Current version: **1.7.0**.
+Version **2.0.0**.
 
-## What it does
+## How it works
 
-- Organizes research material and keeps slide content separate from speaker notes and production records.
-- Generates master-design options for you to choose from, then creates and shows slide designs in that style.
-- Uses your original experimental images, data, and mechanism diagrams while preserving labels, scales, and scientific meaning.
-- Builds editable slides. Complex illustrations remain separate images that you can move or replace.
-- Adjusts layouts to fit real assets and checks alignment, bold text, meaningful line breaks, spacing, and reference colors.
-- Reviews rendered slides for content, layout, and color.
+1. Read the brief and source material, identify the audience, and decide what the presentation needs to communicate.
+2. Draft the slide content and edit it for clear, natural language. Keep speaker notes and production records separate.
+3. Generate and show a master design. In automatic mode, select a direction and continue. If you ask to review samples, wait for your choice.
+4. Generate and show every slide design using the selected master and your real assets.
+5. Build a native PowerPoint master, reconstruct the slides, and review the exported result. Fix concrete problems before delivery.
 
-The default fonts are Microsoft YaHei for Chinese and Times New Roman for English. Font sizes follow the content and master layout. Palette references include Nature- and Science-inspired colors; they are not official journal presentation templates.
+Text, tables, data charts, and simple diagrams use editable objects where supported. Photos and complex illustrations remain separate images you can move or replace. Original data and evidence images take priority over generated approximations.
 
-## Installation
+The plugin adjusts image areas, text, and spacing when real assets have different proportions from the design. It checks alignment, mixed-language bold text, meaningful line breaks, color, and missing elements against the actual PPTX and its rendered pages.
 
-The full plugin includes the skill. Choose one installation method to avoid duplicate entries.
+## What changed in 2.0
 
-### Install the full plugin
+- Content planning now covers different audiences and presentation types. Research-specific requirements apply to research tasks.
+- Copy is edited before image generation. Production reminders stay out of slides, and inference wording is no longer checked against a fixed list of keywords.
+- Colors and layouts follow the topic, audience, and brand. Journal-inspired palettes remain available.
+- Automatic mode handles master selection and sample checks internally. Review mode keeps the approval steps you request.
+- New projects use workflow version 2.0. Existing projects keep their original settings and review requirements.
 
-Run these commands in a Codex CLI that supports plugins:
+The production method is unchanged: design every slide with built-in image generation, show the image, then rebuild it as an editable slide. Chinese uses **Microsoft YaHei** and English uses **Times New Roman**. Font sizes are chosen for the content and layout, then kept consistent by role.
+
+## Install the plugin
+
+Use a Codex CLI that supports plugin commands:
 
 ```shell
 codex plugin marketplace add Yi-Wang798/personal-ppt
 codex plugin add personal-ppt@personal-ppt-marketplace
 ```
 
-The first command adds this repository's marketplace catalog. The second installs the plugin. Reopen Codex or start a new chat before using it. If your client does not provide the `plugin` command, use the skill installation method below.
+The first command adds this repository's marketplace catalog; the second installs the plugin. Reopen Codex or start a new chat after installation. In a desktop client with marketplace support, add this repository and install `personal-ppt` from its listing.
 
-For installation through the desktop plugin directory, add the repository marketplace first, select **Personal PPT**, and install the listed plugin. Interface labels may vary between clients.
+The plugin already includes the skill. Installing a second standalone copy can create duplicate entries.
 
-### Install only the skill
+## Install only the skill
 
 Ask Codex:
 
 ```text
-Use $skill-installer to install the skill from Yi-Wang798/personal-ppt.
-The path inside the repository is skills/personal-ppt. Keep the complete folder.
+Use $skill-installer to install skills/personal-ppt from Yi-Wang798/personal-ppt.
+Keep the complete skill folder.
 ```
 
-You can also select **Code → Download ZIP** on GitHub, extract it, and copy the entire `skills/personal-ppt` folder to `~/.agents/skills/personal-ppt`. On Windows, that is `%USERPROFILE%\.agents\skills\personal-ppt`. Restart Codex if the skill does not appear.
+Or download the repository using **Code → Download ZIP**, extract it, and copy the complete `skills/personal-ppt` directory to `~/.agents/skills/personal-ppt`. On Windows, use `%USERPROFILE%\.agents\skills\personal-ppt`. Keep `scripts`, `references`, and `assets` beside `SKILL.md`. Restart Codex if the skill is not listed.
 
-Keep the `scripts`, `references`, and `assets` folders alongside `SKILL.md`. If you already installed the plugin, you do not need a second standalone copy of the skill.
-
-## Usage
+## Use it
 
 ```text
-Use $personal-ppt to create an editable research presentation from these materials.
-Show me master-design options first, then design and build the slides.
+Use $personal-ppt to make a 12-slide business presentation from these materials.
+Generate and show every slide design, then build the editable PPTX. Complete it automatically.
 ```
 
-The workflow covers source checks, copy editing, master selection, slide design, review of a complex sample slide, reconstruction, and final checks. The plugin keeps the original references and records layout adjustments. If a real figure has different proportions from the design image, it can resize the figure area and move nearby text to keep the content readable and balanced.
+```text
+Use $personal-ppt to create a lesson presentation. Show me master-design options before continuing.
+```
 
-## Requirements
+You can specify the audience, duration, slide count, language, and brand requirements. The plugin can infer details from the supplied material and asks when missing information would change the result.
 
-Codex must have access to its built-in image generation tool and the Presentations skill. Regional color sampling uses Pillow. The workflow discovers the available runtime through `load_workspace_dependencies`. It can use Humanizer-zh for copy editing when that skill is installed.
+## Requirements and limits
 
-This repository contains instructions and helper tools. It does not include Codex, model services, or account quotas, and installing it does not add those capabilities. Fonts, tool versions, and models can affect the result.
+Codex needs access to its built-in image generation tool and the Presentations skill. Runtime discovery uses `load_workspace_dependencies`; regional color sampling uses Pillow. Humanizer and Humanizer ZH can support copy editing when installed. The workflow also includes a self-contained copy guide.
 
-## Files and entry points
+This repository provides instructions and helper scripts, not model access, subscriptions, or image-generation quota. Rebuilding images as editable slides still requires measurement and visual review. Internal checks aim to reduce revisions; they cannot guarantee a perfect first result for every brief. Complex raster illustrations are not editable vector paths.
+
+`assets/example-spec.json` is a synthetic example of the earlier layout schema. It is not a completed deck or proof of the full image-generation workflow. The 2.0 script regression results are in [validation-v2.md](validation-v2.md).
+
+## Repository structure
 
 ```text
-.agents/plugins/marketplace.json   Catalog that lets Codex find the plugin
-.codex-plugin/plugin.json         Plugin name, version, and skill location
-skills/personal-ppt/SKILL.md       Presentation workflow
+.agents/plugins/marketplace.json   Marketplace catalog
+.codex-plugin/plugin.json         Plugin metadata
+skills/personal-ppt/SKILL.md       Main workflow
 skills/personal-ppt/scripts/      Checks and helper tools
-skills/personal-ppt/references/   Schemas, workflows, and attribution
-skills/personal-ppt/assets/       Technical example and palette references
+skills/personal-ppt/references/   Task, writing, design, and reconstruction guides
+skills/personal-ppt/assets/       Technical example and optional palettes
 ```
 
-The marketplace catalog is a repository configuration file. You do not need to purchase it, and it does not mean the plugin has passed review for the official public directory. Creating the file has no nationality or location requirement. Codex service availability and account requirements apply separately.
+The marketplace catalog is a configuration file you can create and share without purchasing it. It is separate from approval for an official public plugin directory. Codex service availability and account requirements apply separately.
 
-## Limitations
+## Sources and licensing
 
-Rebuilding editable objects from an image still requires measurement and visual calibration. Scripts can catch some structural, text, and color issues, but they cannot establish scientific accuracy or judge every layout. Complex raster illustrations are replaceable images, not fully editable vector paths.
+See [sources.md](skills/personal-ppt/references/sources.md), [sources.lock.json](skills/personal-ppt/references/sources.lock.json), and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for sources, scope, and upstream notices. Version 2.0 selectively adapts writing and design ideas; it does not bundle a chain of third-party rewriting services.
 
-`assets/example-spec.json` is a synthetic technical example, not a finished project that has completed the image-generation and review workflow.
-
-## Attribution and licensing
-
-See [sources.md](skills/personal-ppt/references/sources.md) for borrowed methods and scope, and [sources.lock.json](skills/personal-ppt/references/sources.lock.json) for pinned revisions. Upstream license files are included; palette sources have separate license notices. Read [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for details.
-
-Installation follows OpenAI's [plugin documentation](https://developers.openai.com/plugins/build/plugins) and [skill documentation](https://learn.chatgpt.com/docs/build-skills).
+Installation references: OpenAI's [plugin documentation](https://developers.openai.com/plugins/build/plugins) and [skill documentation](https://learn.chatgpt.com/docs/build-skills).

@@ -165,5 +165,65 @@
       "sha256": "35eca1b1a5d313b7ebcd2236670831c2e5f13920b8259208eeb3cfad94685fa0",
       "reuse": "Selective methods only; no copied implementation or full text"
     }
+  ],
+  "v2_method_references": [
+    {
+      "repository": "larashero3-dotcom/lieflat-less-ai-tone",
+      "commit": "27d29232f10124db904ca9c0536d0b67cb3b2833",
+      "retrieved_on": "2026-10-19",
+      "reuse": "Concepts only; no source code or full skill copied",
+      "usage": "Chinese genre-aware minimal edits",
+      "url": "https://github.com/larashero3-dotcom/lieflat-less-ai-tone/tree/27d29232f10124db904ca9c0536d0b67cb3b2833"
+    },
+    {
+      "repository": "blader/humanizer",
+      "commit": "8c307f367c91bd974002f10f2be2965d642c13df",
+      "retrieved_on": "2026-10-19",
+      "reuse": "Concepts only; no source code or full skill copied",
+      "usage": "Structural copy editing; local 2.8.2 used for README",
+      "url": "https://github.com/blader/humanizer/tree/8c307f367c91bd974002f10f2be2965d642c13df"
+    },
+    {
+      "repository": "daniel-bogale/anti-ai-writing-humanizer",
+      "commit": "46da9518a61a2a0a0edd28bff03560f1f5879de1",
+      "retrieved_on": "2026-10-19",
+      "reuse": "Concepts only; no source code or full skill copied",
+      "usage": "Light editing and clean-first drafting",
+      "url": "https://github.com/daniel-bogale/anti-ai-writing-humanizer/tree/46da9518a61a2a0a0edd28bff03560f1f5879de1"
+    },
+    {
+      "repository": "keez97/humanizer",
+      "commit": "2d9a116fa9caee2c3466a7c7d419cbe02b35a470",
+      "retrieved_on": "2026-10-19",
+      "reuse": "Concepts only; no source code or full skill copied",
+      "usage": "Light mode preserves qualifications; no score gate imported",
+      "url": "https://github.com/keez97/humanizer/tree/2d9a116fa9caee2c3466a7c7d419cbe02b35a470"
+    },
+    {
+      "repository": "pbakaus/impeccable",
+      "commit": "0665bd812ae0908fcab17b96fd4f840defb882d9",
+      "retrieved_on": "2026-10-19",
+      "reuse": "Concepts only; no source code or full skill copied",
+      "usage": "Content-led hierarchy; no web detector imported",
+      "url": "https://github.com/pbakaus/impeccable/tree/0665bd812ae0908fcab17b96fd4f840defb882d9"
+    },
+    {
+      "repository": "opitaru-sys/deck-dna",
+      "commit": "a77a3dbc7cd007a3f6add610f6a5f8aa893d7a2f",
+      "retrieved_on": "2026-10-19",
+      "reuse": "Concepts only; no source code or full skill copied",
+      "usage": "Observe visual features and text capacity; no code imported",
+      "url": "https://github.com/opitaru-sys/deck-dna/tree/a77a3dbc7cd007a3f6add610f6a5f8aa893d7a2f"
+    }
+  ],
+  "readme_editors": [
+    {
+      "skill": "humanizer",
+      "version": "2.8.2"
+    },
+    {
+      "skill": "humanizer-zh",
+      "version": "0.1.0"
+    }
   ]
 }

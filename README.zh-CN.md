@@ -1,27 +1,34 @@
-# 个人 PPT
+# personal-ppt
 
 [English](README.md) | 简体中文
 
-个人 PPT 是一个面向 Codex 的科研演示文稿插件。它先生成设计参考图，再把文字、表格、数据图表和简单流程结构做成可编辑的 PowerPoint 对象。
+一个用于制作可编辑演示文稿的 Codex 插件，适用于工作汇报、商业方案、教学培训、产品介绍、科研汇报和个人展示。它先生成并展示每页设计图，再重建为 PowerPoint。
 
-当前版本：**1.7.0**。
+当前版本 **2.0.0**。
 
-## 它能做什么
+## 制作流程
 
-- 整理研究材料，核对数据，把页面正文、演讲备注和制作记录分开。
-- 生成母版候选供你选择，再按选定风格生成并展示逐页设计图。
-- 优先使用你的原始实验图片、数据和机制图，保留主体、图例、刻度及科学含义。
-- 重建可编辑 PPT；复杂插画作为独立图片插入，可以移动或替换。
-- 按真实素材比例调整布局，检查居中、字重、语义换行、组件间距和参考颜色。
-- 对照实际 PPT 渲染，分别检查内容、排版和颜色。
+1. 阅读要求和材料，确定受众、用途，以及这份 PPT 要讲清什么。
+2. 起草并精简页面文案，将演讲备注、制作记录与正文分开。
+3. 生成并展示母版设计图。自动模式自行选型并继续；你要求先看样张时，等待你选择。
+4. 按所选母版和真实素材生成、展示每页设计图。
+5. 建立原生 PPT 母版，逐页重建，检查实际导出结果并修正具体问题。
 
-默认中文字体为微软雅黑（Microsoft YaHei），英文字体为 Times New Roman。字号在母版设计阶段按内容和排版确定。配色可参考 Nature、Science 等期刊风格，这些色板不是期刊官方 PPT 模板。
+文字、表格、有数据的图表和简单流程结构尽量使用可编辑对象。照片与复杂插画作为独立图片，可以移动或替换。原数据和真实证据图片优先，不用生图结果冒充原材料。
 
-## 安装
+真实素材的比例与设计图不同时，插件可以调整图区、文字和间距。它会结合实际 PPTX 与逐页渲染，检查对齐、混排文字加粗、语义换行、颜色和元素遗漏。
 
-推荐安装完整插件。插件已经包含技能，二者选一种安装即可。
+## 2.0 改了什么
 
-### 安装完整插件
+- 内容规划适配不同受众和用途，科研附加要求只用于科研任务。
+- 文案在生图前定稿，制作提醒留在后台；推测表达不再靠固定关键词通过检查。
+- 配色和布局根据主题、受众和品牌选择，期刊参考色板继续保留。
+- 自动模式内部完成母版选型和样页检查；先看样张模式保留你要求的确认步骤。
+- 新项目使用 workflow_version 2.0，旧项目保留原设置和验收要求。
+
+制作路线保持不变：每页先内置生图并展示，再重建可编辑 PPT。中文使用**微软雅黑 Microsoft YaHei**，英文使用 **Times New Roman**；字号按内容与排版判断，同角色全套统一。
+
+## 安装插件
 
 在支持插件命令的 Codex CLI 中运行：
 
@@ -30,59 +37,57 @@ codex plugin marketplace add Yi-Wang798/personal-ppt
 codex plugin add personal-ppt@personal-ppt-marketplace
 ```
 
-第一条命令添加本仓库的市场目录，第二条安装插件。重新打开 Codex 或新建聊天后使用。如果你的客户端没有 `plugin` 命令，可以采用下面的技能安装方式。
+第一条添加本仓库的市场目录，第二条安装插件。安装后重新打开 Codex 或新建聊天。支持仓库市场的桌面客户端，也可以添加本仓库，在列表中安装 `personal-ppt`。
 
-想在桌面插件目录中操作时，先添加上述仓库市场，再在插件目录选择 **Personal PPT**，找到“个人 PPT”并安装。不同客户端的界面名称可能略有区别。
+插件已包含技能，不必再安装一份同名独立技能，以免重复显示。
 
-### 只安装技能
+## 只安装技能
 
 在 Codex 中发送：
 
 ```text
-使用 $skill-installer，从 Yi-Wang798/personal-ppt 仓库安装技能，
-仓库内部路径是 skills/personal-ppt，请保留完整目录。
+使用 $skill-installer，从 Yi-Wang798/personal-ppt 安装技能，
+仓库内路径是 skills/personal-ppt，保留完整文件夹。
 ```
 
-也可以从 GitHub 的 **Code → Download ZIP** 下载并解压，将完整的 `skills/personal-ppt` 文件夹放到用户级技能目录 `~/.agents/skills/personal-ppt`。Windows 对应 `%USERPROFILE%\.agents\skills\personal-ppt`。如果没有识别，重启 Codex。
-
-不要只下载 `SKILL.md`，它需要旁边的 `scripts`、`references` 和 `assets`。已经安装插件时，不必再安装同名独立技能，以免重复显示。
+也可以点击 GitHub 的 **Code → Download ZIP**，解压后将完整的 `skills/personal-ppt` 文件夹放入 `~/.agents/skills/personal-ppt`。Windows 对应 `%USERPROFILE%\.agents\skills\personal-ppt`。保留 `SKILL.md` 旁的 `scripts`、`references` 和 `assets`；未识别时重启 Codex。
 
 ## 使用
 
 ```text
-使用 $personal-ppt，根据这份材料制作可编辑科研汇报 PPT。
-先生成母版让我选择，再逐页设计和制作。
+使用 $personal-ppt，根据这些材料制作 12 页商业汇报。
+每页先生图并展示，再制作可编辑 PPT，直接完成。
 ```
-
-流程是：核实材料、定稿文案、选择母版、逐页设计、验收复杂样页、重建 PPT，最后检查并交付。插件会保留参考图和调整记录；当真实图片的比例与设计图不同，它可以调整图区、文字和间距，优先保证完整、清晰和匀称。
-
-## 运行条件
-
-Codex 需要能调用内置生图工具和 Presentations 技能。区域取色使用 Pillow；运行时通过 `load_workspace_dependencies` 发现可用环境。已安装 Humanizer-zh 时，插件可借用它的表达精简方法。
-
-本仓库提供工作流程和检查工具，不附带 Codex、模型服务或账户额度。安装文件不会自动补齐这些能力。字体、工具版本和模型不同，也可能影响输出效果。
-
-## 目录与两个入口
 
 ```text
-.agents/plugins/marketplace.json   市场目录：让 Codex 找到插件
-.codex-plugin/plugin.json         插件入口：名称、版本及技能位置
-skills/personal-ppt/SKILL.md       技能入口：实际制作流程
-skills/personal-ppt/scripts/      检查与辅助工具
-skills/personal-ppt/references/   协议、流程和来源说明
-skills/personal-ppt/assets/       技术示例与参考配色
+使用 $personal-ppt，制作课堂教学 PPT，先给我看母版样张再继续。
 ```
 
-市场目录是仓库内的配置文件，不需要购买，也不代表已经通过官方公共插件目录审核。创建这个文件不限制国籍或所在地；Codex 服务的地区可用性和账户要求另行适用。
+你可以指定受众、时长、页数、语言和品牌要求。插件会结合材料判断其余信息，缺失内容会影响结果时再询问。
 
-## 当前限制
+## 运行条件与限制
 
-图片到可编辑对象仍需测量、重建和视觉校准。脚本可以发现部分结构、文字和颜色问题，但不能自动证明科研内容正确或每页都美观。复杂插画内部仍是像素，不能承诺逐路径编辑。
+Codex 需要能调用内置生图工具和 Presentations 技能。运行时通过 `load_workspace_dependencies` 发现，区域取色使用 Pillow。已安装 Humanizer、Humanizer ZH 时可辅助文案编辑；工作流也自带文案说明。
 
-`assets/example-spec.json` 是合成技术示例，并非完成全部生图与验收的成品项目。
+仓库提供流程和辅助脚本，不附带模型权限、订阅或生图额度。图片到可编辑对象仍需要测量与视觉校准。内部检查用于减少返工，不能保证所有任务首轮都完美；复杂插画的内部像素也不能逐路径编辑。
+
+`assets/example-spec.json` 是旧布局协议的合成示例，不是完成整套生图流程的作品。2.0 脚本回归结果见 [validation-v2.md](validation-v2.md)。
+
+## 仓库结构
+
+```text
+.agents/plugins/marketplace.json   市场目录
+.codex-plugin/plugin.json         插件元数据
+skills/personal-ppt/SKILL.md       主流程
+skills/personal-ppt/scripts/      检查与辅助工具
+skills/personal-ppt/references/   场景、文案、设计与重建说明
+skills/personal-ppt/assets/       技术示例与可选配色
+```
+
+市场目录是可自行创建和分享的配置文件，不需要购买；它与进入官方公共插件目录的审核分开。Codex 服务本身的地区可用性和账户要求另行适用。
 
 ## 来源与许可
 
-借鉴项目及整合范围见 [来源说明](skills/personal-ppt/references/sources.md)，固定提交见 [来源记录](skills/personal-ppt/references/sources.lock.json)。上游许可文件一并保留，配色资料的来源和许可单独标注。详情见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+来源和整合范围见 [sources.md](skills/personal-ppt/references/sources.md)、[sources.lock.json](skills/personal-ppt/references/sources.lock.json) 与 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。2.0 选择性借鉴文案和设计方法，不把多套外部改写服务串联进制作流程。
 
-安装方式参考 OpenAI 的[插件说明](https://developers.openai.com/plugins/build/plugins)和[技能说明](https://learn.chatgpt.com/docs/build-skills)。
+安装参考 OpenAI 的[插件说明](https://developers.openai.com/plugins/build/plugins)和[技能说明](https://learn.chatgpt.com/docs/build-skills)。

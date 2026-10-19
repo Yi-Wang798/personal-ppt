@@ -6,8 +6,10 @@ from pathlib import Path
 
 
 def snapshot(spec):
-    return {key: spec.get(key) for key in
-            ("canvas", "style", "master", "sources", "narrative_mode", "layout_catalog", "slides")}
+    keys = ("canvas", "style", "master", "sources", "narrative_mode", "layout_catalog", "slides")
+    if spec.get("workflow_version") == "2.0":
+        keys += ("task_profile", "audience", "purpose", "density", "interaction", "mode")
+    return {key: spec.get(key) for key in keys}
 
 
 def digest(value):

@@ -1,27 +1,14 @@
-# 文案、组合布局和参考图取色 v1.7
+# 文案、组件与取色 2.0
 
-流程：材料核实 → 科研叙事 → Humanizer 精简 → 文案定稿与独立审核 → 母版/分页生图 → 组合排版及原生重建 → 内容、排版、颜色三项验收。v1.6 的灵活调整仍有效；新规则解决布局看似不越界却不好读、整体偏心和文案上错层的问题。
+先读 natural-copy.md，按任务起草准确文案并轻量精简。保留已有术语、事实、数字、因果和判断强度，不用固定关键词证明严谨性。真实需要的限定保留，不反复堆叠提醒。中文与英文使用对应的已安装 Humanizer 方法；不为了“像人”增加幽默、故事或数据。
 
-## 先定稿，再生图
+正文、演讲备注、制作记录分开。slide-body 只含本页内容、图注、导航、引用和读图必要条件；speaker_notes 按请求写口头补充；production_records 保存缺失定义、待核对事项和技术限制，默认不上屏、不自动进备注。
 
-从当前 skills 列表发现并读取已安装 humanizer-zh。只借用删除填充语、重复概括、编辑口吻、抽象总结、直接表达等方法。科研 PPT 不引入幽默、个性表演、随意改术语、为避免三段式硬改真实三项结果、自动删科学限定或机械删除强调字重。Humanizer 不可用时按本文直接精简并说明实际使用的方法，不自动安装外部依赖。
+spec.elements 只包含可见对象。text.text_channel="slide-body"，content_role 为 research/reader-condition/navigation/caption/citation，research 沿用为主体内容角色名。非 text 的标签、表格和图表文字也不能夹带制作记录。读图必要条件可用 reader-condition，记录 source_ids 与 editorial_exception.reason，不以关键词扫描删除真实前提。
 
-三类文字分流：
-- slide-body：研究内容、方法、结果、来源引用，以及读图必需的条件/局限。
-- speaker-notes：口头展开的解释，按用户或项目设置写入备注。
-- production-record：未知定义、待补数据、核对事项、重绘限制、制作提醒，保存到 build/production-records.json 或补充清单，默认不上屏，也不自动进演讲备注。
+运行 editorial_tools.py audit 后实际复读。2.0 文风提示为建议，不设置 AI 味分数；制作记录上屏、无效字段、文字遗漏和事实变化须先修正。content-review.json 保存 status=pass、content_sha256、channels_reviewed/facts_preserved/claim_strength_reviewed/redundancy_reviewed/semantic_wrap_reviewed=true 和具体 observations。材料、用途或文字变化后重新复读，不能自动打勾。
 
-spec.elements 仅包含可见页面对象，text 的 text_channel="slide-body"，content_role 为 research/reader-condition/navigation/caption/citation。speaker_notes、production_records 保存在各自字段/文件，不放进 elements，也不进入生图准确文字清单。单位、样本量、误差线、统计符号、公式定义等读图必需信息保留；不能用去 AI 味掩盖未知数据。未知值记录为待补，正文不能编造已确认数值。
-
-说明直接写做了什么、怎样做、观察到什么；不默认加“当前解释”“为确保”等制作口吻和每页免责声明。若属于推测，claim_type=inference 并用“可能”“提示”等准确限定，不把推测升级为证实因果。确需显示待核实条件时，content_role=reader-condition、source_ids 和 editorial_exception.reason 记录科学必要性，避免关键词扫描机械删除真实局限。
-
-每个 component 的标题、说明只各承担一个信息功能；用 editorial_groups:[{element_ids:[...]}] 关联并检查重复。“来源可追溯/单克隆来源证据/保留完整来源与成像记录”这样的近义堆叠由实际复读识别，保留最具体的一层，不为填版面补文字，允许留白。规则脚本只检测确切重复和常见制作口吻，不能理解所有近义重复。
-
-```text
-<python> scripts/editorial_tools.py audit --spec <deck-spec.json>
-```
-
-在 build/content-review.json 保存 status=pass、content_sha256（audit 输出）、channels_reviewed/scientific_details_preserved/redundancy_reviewed/semantic_wrap_reviewed=true、observations（具体改写及保留事项）。这个审核必须来自实际核对，不由脚本自动勾选。文字、数据或用途改变后审核失效；仅改变颜色/坐标不会使内容审核失效。分页 prompts 与生产预检对新项目检查该记录。母版候选也在文案审核后生成，不能先把未定稿的制作文字画进去。
+组件每层承担不同信息功能，不在标题、副标题、正文与总结条重复同一意思。允许留白，不为凑满三张卡片添字。固定三项、问题标题或纯文字页按表达需要保留。
 
 ## 句子与换行一起设计
 

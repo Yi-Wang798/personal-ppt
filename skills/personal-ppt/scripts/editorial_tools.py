@@ -7,9 +7,14 @@ from pathlib import Path
 
 
 def content_snapshot(spec):
-    return [{'id':page['id'],'title':page.get('title'),'elements':[
+    pages = [{'id':page['id'],'title':page.get('title'),'elements':[
         {k:e[k] for k in ('id','kind','text','label','rows','categories','series','unit','text_channel','content_role','claim_type','semantic_lines','editorial_exception','source_ids') if k in e}
         for e in page.get('elements',[])]} for page in spec.get('slides',[])]
+    if spec.get('workflow_version') == '2.0':
+        context = {key: spec.get(key) for key in ('task_profile','audience','purpose','density','language')}
+        for page in pages:
+            page['context'] = context
+    return pages
 
 
 def hash_value(value):
@@ -27,12 +32,25 @@ def page_digests(spec):
 
 def audit(spec):
     errors=[];warnings=[]
+    from workflow_policy import is_v2
+    v2 = is_v2(spec)
     production=re.compile(r'待核对|待补充|本次生成|制作备注|制作记录|重绘限制|资料未提供|定义与计算公式待')
     wrapper=re.compile(r'当前解释[：:]|希望这对|为了让.*(?:页面|版面)|保留完整来源与成像记录')
     for page in spec.get('slides',[]):
         items={e['id']:e for e in page.get('elements',[])}
         for e in items.values():
-            if e.get('kind')!='text':continue
+            if e.get('kind')!='text':
+                if v2:
+                    values = [e.get('label', ''), *e.get('categories', [])]
+                    values.extend(cell for row in e.get('rows', []) for cell in row)
+                    values.extend(s.get('name', '') for s in e.get('series', []))
+                    if any(isinstance(value, str) and production.search(value) for value in values):
+                        exception = e.get('editorial_exception', {})
+                        if e.get('content_role') != 'reader-condition' or not exception.get('reason') or not e.get('source_ids'):
+                            errors.append(f"{page['id']}/{e['id']}: 标签或表格混入制作记录")
+                    if any(e.get(key) for key in ('label','rows','categories','series')) and e.get('text_channel', 'slide-body') != 'slide-body':
+                        errors.append(f"{page['id']}/{e['id']}: 非正文文字不能进入可见结构")
+                continue
             label=f"{page['id']}/{e['id']}";text=e.get('text','')
             if e.get('text_channel')!='slide-body':errors.append(label+': 可见文本未分类为页面正文，演讲备注/制作记录不能混入')
             if e.get('content_role') not in {'research','reader-condition','navigation','caption','citation'}:
@@ -43,8 +61,9 @@ def audit(spec):
                     errors.append(label+': 制作过程/待办文字混入正文')
             if wrapper.search(text):
                 exception=e.get('editorial_exception',{})
-                if not exception.get('reason'):errors.append(label+': 存在编辑口吻或重复的抽象表述，先改写再生图')
-            if e.get('claim_type')=='inference' and not re.search('可能|提示|推测|或与|或许',text):
+                if not exception.get('reason'):
+                    (warnings if v2 else errors).append(label+': 存在编辑口吻或重复表述，结合本页用途复读')
+            if not v2 and e.get('claim_type')=='inference' and not re.search('可能|提示|推测|或与|或许',text):
                 errors.append(label+': 推测文字缺少相应限定，不能写成证实因果')
             lines=e.get('semantic_lines')
             if lines is not None:
@@ -62,7 +81,8 @@ def audit(spec):
             if len(texts)!=len(group.get('element_ids',[])):errors.append(page['id']+': 文案组引用了不存在对象')
             if len([t for t in texts if t])!=len(set(t for t in texts if t)):
                 errors.append(page['id']+': 同组件标题/副标题/正文存在重复文字')
-        warnings.append(page['id']+': 近义重复、科学含义和语义断行需人工复读及实际渲染确认')
+        if not v2:
+            warnings.append(page['id']+': 近义重复、科学含义和语义断行需人工复读及实际渲染确认')
     return errors,warnings
 
 
@@ -75,7 +95,8 @@ def check(spec,base,allow_subset=False):
     if allow_subset:matches=matches or all(report.get('page_sha256',{}).get(sid)==value for sid,value in page_digests(spec).items())
     if report.get('status')!='pass' or not matches:
         errors.append('文案审核未通过或定稿文字已改变')
-    for key in ('channels_reviewed','scientific_details_preserved','redundancy_reviewed','semantic_wrap_reviewed'):
+    keys = ('channels_reviewed','facts_preserved','claim_strength_reviewed','redundancy_reviewed','semantic_wrap_reviewed') if spec.get('workflow_version') == '2.0' else ('channels_reviewed','scientific_details_preserved','redundancy_reviewed','semantic_wrap_reviewed')
+    for key in keys:
         if report.get(key) is not True:errors.append('文案审核未完成 '+key)
     if not report.get('observations'):errors.append('文案审核没有具体修改/核对观察')
     return errors
