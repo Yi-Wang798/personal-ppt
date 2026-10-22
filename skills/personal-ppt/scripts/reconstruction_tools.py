@@ -98,7 +98,7 @@ def check_contract(spec,base,stage="production"):
             errors.append(f"{sid} 生图未记录所选母版引用")
         elements={e.get("id"):e for e in page.get("elements",[]) if isinstance(e,dict)}
         adjusted_elements={}
-        if spec.get('workflow_version') in {'1.6','1.7','2.0'} and page.get('adaptations'):
+        if spec.get('workflow_version') in {'1.6','1.7','2.0','2.1'} and page.get('adaptations'):
             import adaptive_layout
             measurement_path=base/'design/reference-measurements.json'
             if measurement_path.is_file():
@@ -168,7 +168,7 @@ def main():
         if args.command=="check":
             file=Path(args.spec).resolve();spec=json.loads(file.read_text(encoding="utf-8-sig"))
             errors=check_contract(spec,file.parent,args.stage)
-            if spec.get("workflow_version") in {"1.5","1.6","1.7","2.0"} and args.stage!="pagination" and spec.get("reconstruction_policy")!="skip-explicit":
+            if spec.get("workflow_version") in {"1.5","1.6","1.7","2.0","2.1"} and args.stage!="pagination" and spec.get("reconstruction_policy")!="skip-explicit":
                 import fidelity_tools
                 errors.extend(fidelity_tools.check_measurements(spec,file.parent))
                 if args.stage=="production":errors.extend(fidelity_tools.check_sample(spec,file.parent))

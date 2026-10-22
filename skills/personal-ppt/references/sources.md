@@ -40,3 +40,7 @@ v1.7 依据用户截图反馈，参考本机已安装 humanizer-zh 的保留含�
 - [opitaru-sys/deck-dna](https://github.com/opitaru-sys/deck-dna)：参考设计特征与文字容量的观察方法；未复制其脚本或模板。
 
 本次实现没有复制 Anthropic PPTX skill 的代码或专有许可文本；既有引擎与 upstream 许可保持原样。引用网页的项目自述不等于本插件经过成品质量验证。
+
+## 2.1 实际代码接入
+
+2026-10-22 集成 hugohe3/ppt-master，固定提交 604ecdec8dd6a0405e1abdb49565430902373276，MIT。范围是原生 SVG 几何转换及静态依赖闭包、预设形状数据和六个 presentation_core 构图参考。vendor/ppt-master/vendor-manifest.json 与 assets/components/index.json 记录文件与 SHA-256。原文件不改写，保留 LICENSE、SKILL 元数据、署名检查以及预设数据的第三方许可证。native_bridge.py 是本地新增适配层；文字、图片、图表、表格与母版由同一个 python-pptx 包封装。未接入整套上游交互、外部生图、动画或公式管线。此前版本仅借鉴方法的说明属于历史版本，不代表 2.1 的范围。

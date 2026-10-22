@@ -4,7 +4,7 @@
 
 一个用于制作可编辑演示文稿的 Codex 插件，适用于工作汇报、商业方案、教学培训、产品介绍、科研汇报和个人展示。它先生成并展示每页设计图，再重建为 PowerPoint。
 
-当前版本 **2.0.0**。
+当前版本 **2.1.0**。
 
 ## 制作流程
 
@@ -18,15 +18,17 @@
 
 真实素材的比例与设计图不同时，插件可以调整图区、文字和间距。它会结合实际 PPTX 与逐页渲染，检查对齐、混排文字加粗、语义换行、颜色和元素遗漏。
 
-## 2.0 改了什么
+## 2.1 更新
 
-- 内容规划适配不同受众和用途，科研附加要求只用于科研任务。
-- 文案在生图前定稿，制作提醒留在后台；推测表达不再靠固定关键词通过检查。
-- 配色和布局根据主题、受众和品牌选择，期刊参考色板继续保留。
-- 自动模式内部完成母版选型和样页检查；先看样张模式保留你要求的确认步骤。
-- 新项目使用 workflow_version 2.0，旧项目保留原设置和验收要求。
+- 接入 [PPT Master](https://github.com/hugohe3/ppt-master) 的固定版本原生几何转换。简单 SVG 路径与已支持的 Office 形状可以保留为可编辑对象。
+- 用同一份 scene 传递测量位置、文字样式和素材。全套固定元素写入真正的 PPT 母版，文字角色沿用母版设置。
+- 复杂插画可以拆成干净背景、主体和前景。每次分层生图都参考原始分页设计图，文字另建原生对象，证据原图保持不变。
+- 增加六种构图参考：对比、重点句、图文分栏、时间流程、图表解读和表格摘要。按内容使用，不要求每页套相同布局。
+- 表格与基础数据图保持可编辑；图表附带包含所给数值的 Excel 工作簿。
 
-制作路线保持不变：每页先内置生图并展示，再重建可编辑 PPT。中文使用**微软雅黑 Microsoft YaHei**，英文使用 **Times New Roman**；字号按内容与排版判断，同角色全套统一。
+具体用法见 [原生转换接入](skills/personal-ppt/references/native-bridge.md)。本次只接入上述部分，暂不包含上游动画、外部生图服务和公式转换。
+
+新项目使用 workflow_version=2.1，旧项目保持原设置。仍然逐页生成并展示设计图，再重建 PPT。中文使用**微软雅黑**，英文使用 **Times New Roman**，字号根据内容与排版判断。
 
 ## 安装插件
 
@@ -50,7 +52,7 @@ codex plugin add personal-ppt@personal-ppt-marketplace
 仓库内路径是 skills/personal-ppt，保留完整文件夹。
 ```
 
-也可以点击 GitHub 的 **Code → Download ZIP**，解压后将完整的 `skills/personal-ppt` 文件夹放入 `~/.agents/skills/personal-ppt`。Windows 对应 `%USERPROFILE%\.agents\skills\personal-ppt`。保留 `SKILL.md` 旁的 `scripts`、`references` 和 `assets`；未识别时重启 Codex。
+也可以点击 GitHub 的 **Code → Download ZIP**，解压后将完整的 `skills/personal-ppt` 文件夹放入 `~/.agents/skills/personal-ppt`。Windows 对应 `%USERPROFILE%\.agents\skills\personal-ppt`。保留 `SKILL.md` 旁的 `scripts`、`references`、`assets` 和 `vendor`；未识别时重启 Codex。
 
 ## 使用
 
@@ -91,3 +93,5 @@ skills/personal-ppt/assets/       技术示例与可选配色
 来源和整合范围见 [sources.md](skills/personal-ppt/references/sources.md)、[sources.lock.json](skills/personal-ppt/references/sources.lock.json) 与 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。2.0 选择性借鉴文案和设计方法，不把多套外部改写服务串联进制作流程。
 
 安装参考 OpenAI 的[插件说明](https://developers.openai.com/plugins/build/plugins)和[技能说明](https://learn.chatgpt.com/docs/build-skills)。
+
+当前转换依赖 Python 的 python-pptx、Pillow 和 lxml，完整 skill 须包含 vendor 目录。测试记录见 [validation-v2.1.md](validation-v2.1.md)。

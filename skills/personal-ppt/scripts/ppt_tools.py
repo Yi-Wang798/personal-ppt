@@ -242,18 +242,18 @@ def preflight(spec, base, stage="layout"):
         helper = importlib.util.module_from_spec(helper_spec)
         helper_spec.loader.exec_module(helper)
         errors.extend(helper.check_contract(spec, base, "production"))
-        if spec.get("workflow_version") in {"1.4", "1.5", "1.6", "1.7", "2.0"} and stage == "production":
+        if spec.get("workflow_version") in {"1.4", "1.5", "1.6", "1.7", "2.0", "2.1"} and stage == "production":
             lock_spec = importlib.util.spec_from_file_location("ppt_design_contract", Path(__file__).with_name("design_contract.py"))
             lock_helper = importlib.util.module_from_spec(lock_spec)
             lock_spec.loader.exec_module(lock_helper)
             errors.extend(lock_helper.check_lock(spec, base))
-        if spec.get("workflow_version") in {"1.5","1.6","1.7","2.0"} and spec.get("reconstruction_policy") != "skip-explicit":
+        if spec.get("workflow_version") in {"1.5","1.6","1.7","2.0","2.1"} and spec.get("reconstruction_policy") != "skip-explicit":
             fidelity_spec = importlib.util.spec_from_file_location("ppt_fidelity", Path(__file__).with_name("fidelity_tools.py"))
             fidelity = importlib.util.module_from_spec(fidelity_spec)
             fidelity_spec.loader.exec_module(fidelity)
             errors.extend(fidelity.check_measurements(spec, base))
             if stage == "production": errors.extend(fidelity.check_sample(spec, base))
-        if spec.get('workflow_version') in {'1.7','2.0'}:
+        if spec.get('workflow_version') in {'1.7','2.0','2.1'}:
             import editorial_tools
             errors.extend(editorial_tools.check(spec,base,allow_subset=stage=='sample'))
             if spec.get('reconstruction_policy')!='skip-explicit':
@@ -294,7 +294,7 @@ def design_check(spec):
             warnings.append(f"{label} 样张未记录至少 3 条需保留的设计特征")
         if not spec.get("master") and index >= 2 and families[index] and len(set(families[index-2:index+1])) == 1 and not all(s.get("repeat_reason") for s in slides[index-2:index+1]):
             warnings.append(f"第 {index-1}–{index+1} 页连续同构图；检查是否单调，必要对照可写 repeat_reason")
-        if (spec.get("workflow_version") != "2.0" or spec.get("task_profile", {}).get("scenario") == "research") and slide.get("scientific_role") == "result" and (not slide.get("takeaway") or not slide.get("evidence_ids")):
+        if (spec.get("workflow_version") not in {"2.0", "2.1"} or spec.get("task_profile", {}).get("scenario") == "research") and slide.get("scientific_role") == "result" and (not slide.get("takeaway") or not slide.get("evidence_ids")):
             warnings.append(f"{label} 科研结果未记录结论与证据映射")
     if not spec.get("master") and len(slides) >= 4 and len(set(filter(None, families))) < 3 and not decision.get("rhythm_exception"):
         warnings.append("全套构图变化较少；按内容增加有意义的变化或记录对照需要")
@@ -310,17 +310,17 @@ def initialize(project):
         (project / directory).mkdir(parents=True, exist_ok=True)
     spec = {"schema_version": 1, "title": "", "audience": "", "purpose": "", "language": "zh-CN",
             "mode": "per-slide", "interaction": "autonomous", "density": "speaking",
-            "workflow_version": "2.0", "task_profile": {"scenario":"general", "objective":"", "delivery_context":"live"}, "slide_count": 0, "canvas": {"width": 1280, "height": 720},
+            "workflow_version": "2.1", "task_profile": {"scenario":"general", "objective":"", "delivery_context":"live"}, "slide_count": 0, "canvas": {"width": 1280, "height": 720},
             "style": {"name": "", "palette": [], "fonts": ["Microsoft YaHei", "Times New Roman"], "visual_direction": ""},
             "design_decision": {"source_policy":"content-only-unless-explicit-style-request", "palette_id":"", "selection_reason":"", "chosen_direction":""},
             "sources": [], "slides": []}
-    spec["master"] = {"id":"", "reference_image":"", "reference_size":{}, "image_sha256":"", "approval":{"confirmed":False,"selected_by":"agent","selection_reason":"","user_selection":"","reference_sha256":""}, "tokens":{"fonts":{"zh":"Microsoft YaHei","en":"Times New Roman"},"text_styles":{}}, "ppt_template_path":""}
+    spec["master"] = {"id":"", "reference_image":"", "reference_size":{}, "image_sha256":"", "approval":{"confirmed":False,"selected_by":"agent","selection_reason":"","user_selection":"","reference_sha256":""}, "tokens":{"fonts":{"zh":"Microsoft YaHei","en":"Times New Roman"},"text_styles":{}}, "elements":[], "ppt_template_path":""}
     save_json(project / "deck-spec.json", spec)
     return {"project": str(project), "status": "created", "note": "骨架未填内容，不能作为可构建说明"}
 
 
 def prompt_jobs(spec, base, slide_ids):
-    if spec.get('workflow_version') in {'1.7','2.0'}:
+    if spec.get('workflow_version') in {'1.7','2.0','2.1'}:
         import editorial_tools
         errors=editorial_tools.check(spec,base)
         if errors:raise ValueError('；'.join(errors))
@@ -447,7 +447,7 @@ def object_kind(obj):
         return "table"
     if obj.find(".//c:chart", NS) is not None:
         return "chart"
-    if tag == "sp":
+    if tag in {"sp", "grpSp"}:
         return "shape"
     return tag
 
@@ -463,6 +463,7 @@ def positioned_objects(root):
                 if t is None:visit(obj,sx,sy,ox,oy);continue
                 off,ext,co,ce=(t.find("a:"+n,NS) for n in ("off","ext","chOff","chExt"))
                 if any(v is None for v in (off,ext,co,ce)):continue
+                output[id(obj)]=[ox+sx*int(off.attrib['x']),oy+sy*int(off.attrib['y']),sx*int(ext.attrib['cx']),sy*int(ext.attrib['cy'])]
                 gx=int(ext.attrib["cx"])/max(1,int(ce.attrib["cx"]))
                 gy=int(ext.attrib["cy"])/max(1,int(ce.attrib["cy"]))
                 visit(obj,sx*gx,sy*gy,ox+sx*(int(off.attrib["x"])-gx*int(co.attrib["x"])),oy+sy*(int(off.attrib["y"])-gy*int(co.attrib["y"])))
@@ -498,7 +499,7 @@ def bind_names(spec, source, output):
         sx, sy = int(size.attrib["cx"])/spec["canvas"]["width"], int(size.attrib["cy"])/spec["canvas"]["height"]
         for filename, slide in zip(ordered, spec["slides"]):
             root = ET.fromstring(archive.read(filename))
-            objects = [obj for obj in root.iter() if obj.tag.rsplit("}", 1)[-1] in {"sp", "pic", "cxnSp", "graphicFrame"}]
+            objects = [obj for obj in root.iter() if obj.tag.rsplit("}", 1)[-1] in {"sp", "grpSp", "pic", "cxnSp", "graphicFrame"}]
             used = set()
             for element in slide["elements"]:
                 wanted = "shape" if element["kind"] == "text" else element["kind"]
@@ -562,7 +563,7 @@ def inspect(spec, pptx):
         for num, (filename, expected) in enumerate(zip(ordered, spec["slides"]), 1):
             root = ET.fromstring(archive.read(filename))
             positions=positioned_objects(root)
-            objects = [obj for obj in root.iter() if obj.tag.rsplit("}", 1)[-1] in {"sp", "pic", "cxnSp", "graphicFrame"}]
+            objects = [obj for obj in root.iter() if obj.tag.rsplit("}", 1)[-1] in {"sp", "grpSp", "pic", "cxnSp", "graphicFrame"}]
             named = {}
             for obj in objects:
                 cn = obj.find(".//p:cNvPr", NS)

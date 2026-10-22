@@ -6,7 +6,7 @@
 
 按 master-reconstruction.md 选定母版并制作原生 master/layout，分页复制/继承，插入临时底图逐项测量重建，复杂元素独立生图插入，最后移除底图。
 
-读当前 Presentations 的 SKILL.md，并按其指引找到实际实现与导出说明，使用 load_workspace_dependencies 返回的 Node/Python 与包目录。仅执行该版本实际要求的记录与检查。使用 @oai/artifact-tool，不运行下载项目脚本，不拼接 PptxGenJS 引擎。
+2.1 新项目读取 [原生转换接入](native-bridge.md)，使用随 skill 固定版本的 PPT Master 几何转换及统一 native_bridge 封装；不拼接多个 PPTX 导出引擎。旧项目保留原构建方式。读取当前 Presentations 的 SKILL.md，用 load_workspace_dependencies 发现实际运行时与包目录，用 Presentations 导入最终文件进行渲染检查，不再次导出替换原文件。
 
 构建源保存在 build/，准确文字与数据在 spec。按当前 API 编写；画布和 box 是 CSS px，字号使用 pt 或明确转换为 px，不能粘贴外部 inch 坐标。
 

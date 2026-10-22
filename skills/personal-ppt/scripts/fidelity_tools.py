@@ -277,7 +277,7 @@ def check_actual_runs(spec, pptx):
             # Explicit panel/line attributes are measured separately; never a default 2px.
             objects = []
             for obj in root.iter():
-                if obj.tag.rsplit('}',1)[-1] not in {'sp','pic','cxnSp','graphicFrame'}:continue
+                if obj.tag.rsplit('}',1)[-1] not in {'sp','grpSp','pic','cxnSp','graphicFrame'}:continue
                 cn = obj.find('.//p:cNvPr',ppt.NS)
                 if cn is not None:objects.append((cn.get('name'),obj))
             actual_order = {name:index for index,(name,_) in enumerate(objects)}
@@ -298,6 +298,11 @@ def check_actual_runs(spec, pptx):
                     errors.append(label+': 无填充被替换为实色')
                 for field,xml_path in [('fill','a:solidFill/a:srgbClr'),('stroke','a:ln/a:solidFill/a:srgbClr')]:
                     if field not in style:continue
+                    if style[field]=='none':
+                        parent=sp if field=='fill' else (sp.find('a:ln',ppt.NS) if sp is not None else None)
+                        if parent is None or parent.find('a:noFill',ppt.NS) is None:
+                            errors.append(label + ': 实际 ' + field + ' 应为无填充')
+                        continue
                     node=sp.find(xml_path,ppt.NS) if sp is not None else None
                     if node is None or node.get('val','').upper()!=style[field].lstrip('#').upper():
                         errors.append(label + ': 实际 ' + field + ' 未匹配参考')
@@ -319,7 +324,7 @@ def check_actual_runs(spec, pptx):
 def delivery(spec, base, pptx, review_path):
     import ppt_tools as ppt
     errors = check_measurements(spec, base) + check_sample(spec, base)
-    if spec.get('workflow_version') in {'1.7','2.0'}:
+    if spec.get('workflow_version') in {'1.7','2.0','2.1'}:
         import editorial_tools,color_sampler
         errors.extend(editorial_tools.check(spec,base));errors.extend(color_sampler.verify(spec,base))
         errors.extend(editorial_tools.check_visible_copy(spec,pptx))
@@ -336,7 +341,7 @@ def delivery(spec, base, pptx, review_path):
         if item.get('reference', {}).get('sha256') != sha(base/page['design_reference']):
             errors.append(sid + ': 对照参考已换稿')
         check_review(base, item, errors, sid, page)
-        if spec.get('workflow_version') in {'1.7','2.0'}:
+        if spec.get('workflow_version') in {'1.7','2.0','2.1'}:
             for gate in ('content','layout','color'):
                 record=item.get('review_sections',{}).get(gate,{})
                 if record.get('passed') is not True or not record.get('observations'):

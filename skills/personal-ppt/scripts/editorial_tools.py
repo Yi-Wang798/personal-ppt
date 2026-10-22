@@ -10,7 +10,7 @@ def content_snapshot(spec):
     pages = [{'id':page['id'],'title':page.get('title'),'elements':[
         {k:e[k] for k in ('id','kind','text','label','rows','categories','series','unit','text_channel','content_role','claim_type','semantic_lines','editorial_exception','source_ids') if k in e}
         for e in page.get('elements',[])]} for page in spec.get('slides',[])]
-    if spec.get('workflow_version') == '2.0':
+    if spec.get('workflow_version') in {'2.0','2.1'}:
         context = {key: spec.get(key) for key in ('task_profile','audience','purpose','density','language')}
         for page in pages:
             page['context'] = context
@@ -95,7 +95,7 @@ def check(spec,base,allow_subset=False):
     if allow_subset:matches=matches or all(report.get('page_sha256',{}).get(sid)==value for sid,value in page_digests(spec).items())
     if report.get('status')!='pass' or not matches:
         errors.append('文案审核未通过或定稿文字已改变')
-    keys = ('channels_reviewed','facts_preserved','claim_strength_reviewed','redundancy_reviewed','semantic_wrap_reviewed') if spec.get('workflow_version') == '2.0' else ('channels_reviewed','scientific_details_preserved','redundancy_reviewed','semantic_wrap_reviewed')
+    keys = ('channels_reviewed','facts_preserved','claim_strength_reviewed','redundancy_reviewed','semantic_wrap_reviewed') if spec.get('workflow_version') in {'2.0','2.1'} else ('channels_reviewed','scientific_details_preserved','redundancy_reviewed','semantic_wrap_reviewed')
     for key in keys:
         if report.get(key) is not True:errors.append('文案审核未完成 '+key)
     if not report.get('observations'):errors.append('文案审核没有具体修改/核对观察')

@@ -7,7 +7,7 @@ from pathlib import Path
 
 def snapshot(spec):
     keys = ("canvas", "style", "master", "sources", "narrative_mode", "layout_catalog", "slides")
-    if spec.get("workflow_version") == "2.0":
+    if spec.get("workflow_version") in {"2.0", "2.1"}:
         keys += ("task_profile", "audience", "purpose", "density", "interaction", "mode")
     return {key: spec.get(key) for key in keys}
 

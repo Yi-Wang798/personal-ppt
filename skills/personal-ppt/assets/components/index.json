@@ -1,0 +1,44 @@
+{
+  "repository": "hugohe3/ppt-master",
+  "commit": "604ecdec8dd6a0405e1abdb49565430902373276",
+  "license": "MIT",
+  "usage": "Planning references, not a separate template production route. Do not copy example text or fonts.",
+  "components": [
+    {
+      "id": "comparison",
+      "source": "upstream/05_comparison.svg",
+      "sha256": "4fd84ac5ed2cbb63b34e4370695fb2c568628e563bcc33724f04f90ec2f23e39",
+      "use": "Reference composition only; adapt to the brief, real assets, and fixed font preferences."
+    },
+    {
+      "id": "hero_statement",
+      "source": "upstream/10_hero_statement.svg",
+      "sha256": "64339e7008aabbb6017c582a9e438740688551ddf6e92d95cae326a84d980dfa",
+      "use": "Reference composition only; adapt to the brief, real assets, and fixed font preferences."
+    },
+    {
+      "id": "editorial_split",
+      "source": "upstream/11_editorial_split.svg",
+      "sha256": "2ee5ed7fa2103cd9018ff2a6718a5a7be69be49992ae48144934529725af4ea9",
+      "use": "Reference composition only; adapt to the brief, real assets, and fixed font preferences."
+    },
+    {
+      "id": "process_timeline",
+      "source": "upstream/14_process_timeline.svg",
+      "sha256": "a2626350a6d96d323c165f8319bfb9834d77db24fbaed169a81b3f4d51f031b7",
+      "use": "Reference composition only; adapt to the brief, real assets, and fixed font preferences."
+    },
+    {
+      "id": "chart_insight",
+      "source": "upstream/19_chart_insight.svg",
+      "sha256": "7f951e76ab6894f6f43f69efa85d2034bf879056d2a53ecc1202b19d9a27266e",
+      "use": "Reference composition only; adapt to the brief, real assets, and fixed font preferences."
+    },
+    {
+      "id": "table_summary",
+      "source": "upstream/20_table_summary.svg",
+      "sha256": "c8c5900c85d8021020d1224d3c00c7c9a0e3ac8424643511a85ed734228356d0",
+      "use": "Reference composition only; adapt to the brief, real assets, and fixed font preferences."
+    }
+  ]
+}

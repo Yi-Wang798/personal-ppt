@@ -2,7 +2,7 @@
 
 
 def is_v2(spec):
-    return spec.get("workflow_version") == "2.0"
+    return spec.get("workflow_version") in {"2.0", "2.1"}
 
 
 def needs_user_review(spec):

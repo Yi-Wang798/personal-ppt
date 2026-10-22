@@ -2,7 +2,7 @@
 name: personal-ppt
 description: 制作或修改可编辑 PPT，适用于工作汇报、商业方案、教学培训、产品介绍、科研与个人展示。先生成并展示母版和逐页设计图，再重建原生对象，按任务组织内容并检查实际成品。
 metadata:
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # personal-ppt
@@ -17,17 +17,17 @@ metadata:
 
 ## 制作
 
-1. **规划内容**：用 `scripts/ppt_tools.py init --project <绝对路径>` 创建项目；新项目 workflow_version="2.0"。确定每页主旨、准确文字、真实素材和布局意图，不提前锁死坐标。按 [自然文案](references/natural-copy.md) 轻量精简，分离正文、演讲备注和制作记录。数据、术语、引用和判断强度保持准确。
+1. **规划内容**：用 `scripts/ppt_tools.py init --project <绝对路径>` 创建项目；新项目 workflow_version="2.1"。确定每页主旨、准确文字、真实素材和布局意图，不提前锁死坐标。按 [自然文案](references/natural-copy.md) 轻量精简，分离正文、演讲备注和制作记录。数据、术语、引用和判断强度保持准确。
 2. **定稿与风格**：按 [文案、组件与取色](references/editorial-layout-color.md) 完成内部内容复读和 content-review。按 [通用幻灯片设计](references/slide-design.md) 选择适合任务的视觉方向。中文微软雅黑、英文 Times New Roman；字号按内容与排版判断，同角色全套统一。期刊配色仅为可选项。
 3. **母版设计**：遵循 [母版与重建](references/master-reconstruction.md)。默认 interaction="autonomous"，实际生成并展示母版设计图，自主选择并记录理由；不能伪造用户确认。用户要求先看样张或选择风格时用 review，展示候选后等待明确选择。已确认的风格直接复用。
 4. **逐页生图**：读 [视觉流程](references/visual-workflow.md)，调用当前 imagegen，为每页生成并展示完整设计图。所选母版作为实际风格输入；真实素材按原比例预留。只允许定稿文字上屏，不自行补总结框、免责声明或口号。生图完成后冻结参考图，并独立记录元素与样式测量。
-5. **原生重建**：读 [可编辑制作](references/editable-ppt.md) 和 [页面协议](references/deck-spec.md)。先做原生 PPT 母版，再重建本项目最有代表性的复杂页，检查真实渲染。自动模式内部修正后继续；review 模式展示对照并等用户验收。不得为了样页达标而增加装饰元素。之后逐页叠图定位和重建，复杂元素用独立图片保留；按 [灵活排版](references/adaptive-layout.md) 纠正比例、居中、留白与可读性。
+5. **原生重建**：读 [可编辑制作](references/editable-ppt.md) 和 [页面协议](references/deck-spec.md)。新项目按 [原生转换接入](references/native-bridge.md) 使用统一 scene 和 PPT Master 几何转换；先做原生 PPT 母版，再重建本项目最有代表性的复杂页，检查真实渲染。自动模式内部修正后继续；review 模式展示对照并等用户验收。不得为了样页达标而增加装饰元素。之后逐页叠图定位和重建，复杂元素用独立图片保留；需要拆分时各图层始终参考同一原始设计图，背景、主体与前景独立，不串联反复生图；按 [灵活排版](references/adaptive-layout.md) 纠正比例、居中、留白与可读性。
 6. **内部检查与修正**：按 [质量检查](references/quality-checks.md) 核对实际 PPT。预览与导出共用同一内容和构建参数。错字、错误数据、缺元素、溢出、裁断、偏位及格式损失先自行修复；只重做受影响的页。制作记录和检查报告不进入页面，也不自动进入演讲备注。只有缺失关键资料、真实冲突或超出授权的方向变化才需要用户决定。
 7. **交付**：交付 PPTX、逐页预览和可复用项目源。PDF、演讲稿按请求提供。以真实检查结果说明仍有的限制，不宣称任意任务都能一次完美完成。
 
 ## 保留的制作要求
 
-- 当前已安装的 imagegen 与 Presentations 提供生图及原生构建能力，使用前读取它们的真实 SKILL.md；用 load_workspace_dependencies 发现运行时，不硬编码缓存版本或假定软件已安装。
+- 当前已安装的 imagegen 提供生图，内置 native_bridge 提供新项目原生构建，Presentations 提供实际成品读取和渲染能力，使用前读取它们的真实 SKILL.md；用 load_workspace_dependencies 发现运行时，不硬编码缓存版本或假定软件已安装。
 - 标题、正文、表格、数据图表和简单流程结构尽量为原生可编辑对象；照片和复杂插画为独立可替换图片，不声称内部像素可编辑。不以整页图片冒充成品。
 - 真实数据与原图优先，不从生图结果猜数字或重画证据。图标、卡片和装饰只在表达需要时使用；纯文字重点页可以成立。
 - 保留母版风格、元素完整性、实际区域取色、整段加粗与中英文 runs、组件整体对齐、独立测量和冻结参考图。设计图有缺陷时灵活调整，记录具体变化，不机械复制错误。
@@ -41,4 +41,4 @@ metadata:
 
 `使用 $personal-ppt，重设计这份科研汇报，每页先生图，再制作可编辑 PPT。`
 
-旧项目保留原 workflow_version 和确认要求，不自动迁移或重做。新字段见页面协议。来源及整合范围见 [sources.md](references/sources.md)。辅助脚本不提供自动光栅转矢量引擎。
+旧项目保留原 workflow_version 和确认要求，不自动迁移或重做。新字段见页面协议。来源及整合范围见 [sources.md](references/sources.md)。2.1 集成矢量到原生形状的转换，仍不把光栅图片自动识别为可编辑对象。

@@ -23,3 +23,7 @@ master 保存 id、reference_image、reference_size、image_sha256、approval、
 选择本项目最有代表性的复杂页先重建。自动模式内部查看真实渲染及对照，修复后继续；review 模式展示对照等待用户验收。同一版已有验收复用。简单任务不需要凭空凑齐三种复杂元素。记录字段见 fidelity-gates.md。
 
 叠图定位后，按真实素材、语义换行、可读性与整体平衡作局部调整；规则见 adaptive-layout.md。完整重建后从交付副本删除 pppt:underlay 底图，私人草稿可保留。检查实际 PPT 的对齐、字号、完整加粗和图像比例。
+
+## 2.1 母版落实
+
+固定对象写 master.elements，由 native_bridge master 生成可复用 PPTX，再将真实路径写回 ppt_template_path。页面沿用同一个 slideMaster/layout；master_slot 的文字默认值在 scene 编译时继承。同一套对象描述用于母版与正式导出，禁止各页重新手写一套固定装饰。具体见 [native-bridge.md](native-bridge.md)。

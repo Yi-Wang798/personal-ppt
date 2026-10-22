@@ -234,7 +234,7 @@ class Regression(unittest.TestCase):
         destination=self.base/'new-project'
         ppt.initialize(destination)
         spec=json.loads((destination/'deck-spec.json').read_text(encoding='utf-8'))
-        self.assertEqual('2.0',spec['workflow_version'])
+        self.assertEqual('2.1',spec['workflow_version'])
         self.assertEqual('per-slide',spec['mode'])
         self.assertEqual(['Microsoft YaHei','Times New Roman'],spec['style']['fonts'])
 

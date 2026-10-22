@@ -130,6 +130,14 @@
           "url": "https://github.com/M1n-n9/academic-ppt-master/blob/6825d33f2931b8894435b9bd25c08cfce3476ff0/scripts/svg_to_pptx/drawingml_converter.py"
         }
       ]
+    },
+    {
+      "repository": "hugohe3/ppt-master",
+      "commit": "604ecdec8dd6a0405e1abdb49565430902373276",
+      "license": "MIT",
+      "scope": "2.1 native geometry dependency subset and six layout references",
+      "file_manifest": "../vendor/ppt-master/vendor-manifest.json",
+      "component_manifest": "../assets/components/index.json"
     }
   ],
   "design_guidance": [

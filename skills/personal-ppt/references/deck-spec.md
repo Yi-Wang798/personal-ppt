@@ -52,3 +52,7 @@ design_generation 保存真实 backend="built-in-imagegen"、tool、prompt_path�
 ```
 
 用 load_workspace_dependencies 返回的 Python。项目分 assets/（原素材）、design/（设计图与测量）、prompts/、build/（构建与私人检查）、previews/、output/。example-spec.json 为旧协议合成示例，不是已完成生图和验收的作品。新旧版本不混写；修改旧页时保留原文件与项目设置。
+
+## 2.1 原生字段
+
+新项目 workflow_version="2.1"，仍使用 mode="per-slide"。master.elements 保存跨页固定的 text/shape/image；分页不重复写固定对象。geometry、svg_path、svg_asset_path、adjustments、layer_role、registration_group 的具体约定和命令见 [native-bridge.md](native-bridge.md)。scene 从 spec 编译，不包含制作记录。表格 rows 与基础图表 categories/series 继续可编辑。

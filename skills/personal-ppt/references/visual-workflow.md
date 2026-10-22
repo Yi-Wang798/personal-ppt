@@ -26,3 +26,7 @@
 完成后 `fidelity_tools.py pin` 冻结已经展示的设计图，独立观察后建立 reference-measurements.json 和完整元素清单。重建时先查看图像再按图定位，调整按 adaptive-layout.md 记录。
 
 纯背景和独立插画不含正文、数字和图表标签，透明素材请求真实透明背景；不裁一张带正文整页图再覆盖几个文本框冒充重建。缺少内置生图能力时报告实际阻碍，保留项目，不静默切换成无需生图的制作路线。
+
+## 2.1 独立图片层
+
+复杂画面按需要拆分 background/subject/foreground，实际字段用 layer_role=base/subject/foreground/cutout。每一层都传入同一原始设计图，不用前一层的生图作为下一层参考。文本用原生对象，干净背景不得残留重复文字；透明层保持画布和注册位置。真实证据不再生成。layer-jobs 只提供调用清单，仍须实际调用内置 imagegen 并查看素材。见 [native-bridge.md](native-bridge.md)。
