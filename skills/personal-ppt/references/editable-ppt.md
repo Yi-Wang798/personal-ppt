@@ -1,6 +1,6 @@
 # 可编辑制作
 
-2.0 的交互、逐页生图、样页与交付要求以 SKILL.md、master-reconstruction.md、fidelity-gates.md 为准。以下为构建细节，不增加用户批准节点。
+2.0/2.1 的交互、逐页生图、样页与交付要求以 SKILL.md、master-reconstruction.md、fidelity-gates.md 为准。以下为构建细节，不增加用户批准节点。
 
 ## 原生重建
 
@@ -18,11 +18,11 @@
 2. 用真实 reference_size、image_frame 和 reference_box 测量位置、大小、焦点、行距与层叠，记录完整 reference_inventory。借助临时底图校准，不只描述“图文比例相近”。内容正确性/可编辑性引起的必要差异须具体记录，不能把大幅偏移或遗漏当作微调。
 3. 创建原生文字、表格、图表、语义节点与连接线。每个约定对象名称 `pppt:<slide-id>:<element-id>`；chart/table 名称在 graphicFrame 的 cNvPr，使用当前 API 的真实名称字段。API 不暴露名称时，导出草稿后运行 `ppt_tools.py bind --spec <spec> --pptx <草稿> --out <新的命名候选>`，按原生类型、准确文案和坐标唯一匹配，容差 3px；只写元数据，不创建或替换内容。把命名候选交给正式 finalizer。歧义时修正布局或 API 对象命名，不猜对象。
 4. 插入独立素材；无文字背景可铺底，原图保持比例。纯装饰和复杂插画使用生图或来源图片，不把流程图编辑例外扩大为程序绘制装饰。
-5. 来源按引用需要写入页面或项目来源记录；演讲备注按用户或项目设置写入，制作提醒不自动进入备注。finalizer 后渲染成品。
+5. 来源按引用需要写入页面或项目来源记录；演讲备注按用户或项目设置写入，制作提醒不自动进入备注。正式导出后渲染成品。
 
 文本保留合理段落，不拆成逐字对象。图表使用原始 categories/series，为轴、图例、标签分别设置字体和单位。表格不转图片。连接线有明确方向，靠近对应节点边界。
 
-新建图表的完整字面数据已明确保存在 spec 时，在正式 finalizer 中显式设置 `materializeLiteralChartWorkbooks: true`，使图表带嵌入的 Excel 数据工作簿，并检查该关系有效。编辑现有图表若需要保留公式或原工作簿血缘，不以字面快照替换，按 Presentations 的 native_evidence 流程保留原工作簿。流程线的 head/tail 分别对应起端/终端，不能凭名称猜箭头方向，必须看渲染结果。
+2.1 的 native_bridge 根据 spec 中明确的字面数据嵌入 Excel 工作簿；检查实际关系和数值。2.0 旧项目继续在其正式 finalizer 中显式设置 `materializeLiteralChartWorkbooks: true`。编辑现有图表若需要保留公式或原工作簿血缘，不以字面快照替换，按 Presentations 的 native_evidence 流程保留原工作簿。流程线的 head/tail 分别对应起端/终端，不能凭名称猜箭头方向，必须看渲染结果。
 
 复杂插画内部像素不可编辑，只能移动/裁剪/替换；用户要求编辑路径时需另行矢量重建并说明范围。截图图表没有数据时保留原图或取得准确数据，不猜柱高。inspect 只查原生类型和准确文字，不能证明连接附着、视觉质量或数据语义正确；这些仍需正式检查与视觉审阅。
 

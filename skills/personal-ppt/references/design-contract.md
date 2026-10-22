@@ -15,4 +15,4 @@ PPT 实际对象通过 conversion_trace 追踪到 spec；文字、表格、图�
 <python> scripts/design_contract.py check --spec <deck-spec.json>
 ```
 
-schema_version 保持 1；新任务 workflow_version="2.0"。旧版本的 snapshot 不增加新字段，保持原检查行为；只有明确修订范围需要时才迁移项目。
+schema_version 保持 1；新任务 workflow_version="2.1"。旧版本的 snapshot 不增加新字段，保持原检查行为；只有明确修订范围需要时才迁移项目。

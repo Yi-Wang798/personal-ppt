@@ -1,6 +1,6 @@
-# 页面说明协议 2.0
+# 页面说明协议 2.1
 
-deck-spec.json 是生图与原生制作的共用内容源。schema_version=1 保持兼容；新项目 workflow_version="2.0"，旧项目版本不自动升级。init 仅创建骨架，不编造业务内容。
+deck-spec.json 是生图与原生制作的共用内容源。schema_version=1 保持兼容；新项目 workflow_version="2.1"，旧项目版本不自动升级。init 仅创建骨架，不编造业务内容。
 
 ## 项目
 
